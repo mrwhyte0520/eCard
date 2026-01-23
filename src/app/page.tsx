@@ -557,17 +557,17 @@ function Features() {
             transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
             className="mt-8 overflow-hidden rounded-[1.75rem] border border-brand-accent/20 bg-brand-accent/5 shadow-soft"
           >
-            <div className="bg-brand-accent px-8 py-10 text-brand-ink sm:px-10">
-              <div className="text-balance text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
+            <div className="bg-brand-accent px-4 py-8 text-brand-ink sm:px-6 sm:py-10">
+              <div className="text-balance text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">
                 We are <span className="text-brand-ink/90">innovation</span>, we are <span className="text-brand-ink/90">connection</span>.
               </div>
             </div>
 
             <div className="relative bg-brand-accent/10">
-              <div className="relative h-[240px] overflow-hidden bg-brand-accent/20 sm:h-[280px]">
+              <div className="relative h-[200px] overflow-hidden bg-brand-accent/20 sm:h-[240px] lg:h-[280px]">
                 <div className="absolute inset-0 bg-gradient-to-b from-brand-accent/30 via-brand-accent/20 to-brand-accent/10" />
-                <div className="absolute inset-0 flex items-center justify-center px-6">
-                  <div className="text-6xl font-medium tracking-tight text-brand-ink sm:text-7xl lg:text-8xl">
+                <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-6">
+                  <div className="text-3xl font-medium tracking-tight text-brand-ink sm:text-4xl lg:text-6xl">
                     Connect smart
                   </div>
                 </div>
@@ -587,28 +587,28 @@ function Features() {
                 <div className="h-2.5 w-2.5 rounded-full bg-brand-ink" />
               </div>
 
-              <div className="grid gap-4 p-6 sm:p-8 lg:grid-cols-4">
-                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-6">
-                  <div className="text-base font-semibold tracking-tight text-brand-ink">Innovation</div>
-                  <p className="mt-3 text-sm leading-relaxed text-brand-ink/90">
+              <div className="grid gap-3 p-4 sm:gap-4 sm:p-6 lg:grid-cols-4 lg:gap-4 lg:p-8">
+                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-4 sm:p-5">
+                  <div className="text-sm font-semibold tracking-tight text-brand-ink sm:text-base">Innovation</div>
+                  <p className="mt-2 text-xs leading-relaxed text-brand-ink/90 sm:text-sm">
                     Cutting-edge technology for modern networking.
                   </p>
                 </div>
-                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-6">
-                  <div className="text-base font-semibold tracking-tight text-brand-ink">Simplicity</div>
-                  <p className="mt-3 text-sm leading-relaxed text-brand-ink/90">
+                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-4 sm:p-5">
+                  <div className="text-sm font-semibold tracking-tight text-brand-ink sm:text-base">Simplicity</div>
+                  <p className="mt-2 text-xs leading-relaxed text-brand-ink/90 sm:text-sm">
                     Intuitive design that anyone can use instantly.
                   </p>
                 </div>
-                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-6">
-                  <div className="text-base font-semibold tracking-tight text-brand-ink">Trust</div>
-                  <p className="mt-3 text-sm leading-relaxed text-brand-ink/90">
+                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-4 sm:p-5">
+                  <div className="text-sm font-semibold tracking-tight text-brand-ink sm:text-base">Trust</div>
+                  <p className="mt-2 text-xs leading-relaxed text-brand-ink/90 sm:text-sm">
                     Secure, reliable, and always available.
                   </p>
                 </div>
-                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-6">
-                  <div className="text-base font-semibold tracking-tight text-brand-ink">Growth</div>
-                  <p className="mt-3 text-sm leading-relaxed text-brand-ink/90">
+                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-4 sm:p-5">
+                  <div className="text-sm font-semibold tracking-tight text-brand-ink sm:text-base">Growth</div>
+                  <p className="mt-2 text-xs leading-relaxed text-brand-ink/90 sm:text-sm">
                     Tools that help your business expand.
                   </p>
                 </div>
