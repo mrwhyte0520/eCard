@@ -649,16 +649,16 @@ function Plans() {
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.25, 1, 0.5, 1] }}
-                className="pressable btn-shine group relative overflow-hidden rounded-[2.25rem] bg-gradient-to-b from-brand-ink to-black px-6 py-7 text-white shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
+                className="pressable btn-shine group relative overflow-hidden rounded-[2.25rem] bg-gradient-to-b from-brand-ink to-black px-4 sm:px-6 py-6 sm:py-7 text-white shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
               >
                 <div
                   aria-hidden="true"
-                  className="absolute inset-y-0 left-6 my-auto h-12 w-[5px] rounded-full bg-gradient-to-b from-brand-accent to-brand-accent/70 transition-all duration-300 ease-out group-hover:h-14"
+                  className="absolute inset-y-0 left-4 sm:left-6 my-auto h-12 w-[5px] rounded-full bg-gradient-to-b from-brand-accent to-brand-accent/70 transition-all duration-300 ease-out group-hover:h-14"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/0 via-white/0 to-white/5 opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="pl-7">
+                  <div className="pl-6 sm:pl-7">
                     <div className="text-xl font-semibold tracking-tight">{p.name}</div>
                     <div className="mt-1 text-sm text-white/70">Membership plan</div>
                   </div>
