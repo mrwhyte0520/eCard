@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { MotionConfig, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -68,6 +69,8 @@ function GhostButton({ children }: { children: React.ReactNode }) {
 }
 
 function Nav() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <div className="sticky top-0 z-50 border-b border-brand-line bg-white/90 backdrop-blur">
       <Container>
@@ -77,7 +80,7 @@ function Nav() {
             <span className="text-sm font-semibold tracking-tight text-brand-ink">Hello eCard</span>
           </div>
 
-          <div className="hidden items-center gap-8 text-sm text-brand-muted md:flex">
+          <div className="hidden items-center gap-6 text-sm text-brand-muted md:flex lg:gap-8">
             <Link className="group relative font-medium text-brand-ink" href="/">
               Home
               <span className="absolute -bottom-4 left-0 h-[3px] w-full rounded-full bg-brand-accent" />
@@ -99,7 +102,44 @@ function Nav() {
               <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
             </a>
           </div>
+
+          {/* Mobile menu button */}
+          <div className="flex items-center md:hidden">
+            <button 
+              className="pressable flex h-10 w-10 items-center justify-center rounded-xl border border-brand-line bg-white text-brand-ink shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+              onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+            >
+              <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
         </div>
+
+        {/* Mobile menu */}
+        {mobileMenuOpen && (
+          <div className="md:hidden">
+            <div className="border-t border-brand-line bg-white/95 backdrop-blur">
+              <div className="px-4 py-3 space-y-2">
+                <Link className="block py-2 text-base font-medium text-brand-ink" href="/" onClick={() => setMobileMenuOpen(false)}>
+                  Home
+                </Link>
+                <Link className="block py-2 text-base font-medium text-brand-ink" href="/about" onClick={() => setMobileMenuOpen(false)}>
+                  About Us
+                </Link>
+                <Link className="block py-2 text-base font-medium text-brand-ink" href="/features" onClick={() => setMobileMenuOpen(false)}>
+                  Features
+                </Link>
+                <a className="block py-2 text-base font-medium text-brand-ink" href="#plans" onClick={() => setMobileMenuOpen(false)}>
+                  Plans
+                </a>
+                <a className="block py-2 text-base font-medium text-brand-ink" href="#support" onClick={() => setMobileMenuOpen(false)}>
+                  Support
+                </a>
+              </div>
+            </div>
+          </div>
+        )}
       </Container>
     </div>
   );
@@ -526,59 +566,7 @@ function Features() {
           >
             <div className="bg-brand-accent px-4 py-8 text-brand-ink sm:px-6 sm:py-10">
               <div className="text-balance text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">
-                We are <span className="text-brand-ink/90">innovation</span>, we are <span className="text-brand-ink/90">connection</span>.
-              </div>
-            </div>
-
-            <div className="relative bg-brand-accent/10">
-              <div className="relative h-[200px] overflow-hidden bg-brand-accent/20 sm:h-[240px] lg:h-[280px]">
-                <div className="absolute inset-0 bg-gradient-to-b from-brand-accent/30 via-brand-accent/20 to-brand-accent/10" />
-                <div className="absolute inset-0 flex items-center justify-center px-4 sm:px-6">
-                  <div className="text-3xl font-medium tracking-tight text-brand-ink sm:text-4xl lg:text-6xl">
-                    Connect smart
-                  </div>
-                </div>
-                <div className="absolute inset-0 flex items-center justify-center">
-                  <Image 
-                    src="https://images.unsplash.com/photo-1557804506-669a67965ba0?w=800&h=400&fit=crop&auto=format" 
-                    alt="Technology connection" 
-                    fill
-                    className="object-cover opacity-20"
-                  />
-                </div>
-              </div>
-
-              <div className="pointer-events-none absolute right-3 top-[160px] hidden -translate-y-1/2 flex-col gap-2 lg:flex">
-                <div className="h-2.5 w-2.5 rounded-full bg-brand-ink" />
-                <div className="h-2.5 w-2.5 rounded-full bg-brand-ink" />
-                <div className="h-2.5 w-2.5 rounded-full bg-brand-ink" />
-              </div>
-
-              <div className="grid gap-3 p-4 sm:gap-4 sm:p-6 lg:grid-cols-4 lg:gap-4 lg:p-8">
-                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-4 sm:p-5">
-                  <div className="text-sm font-semibold tracking-tight text-brand-ink sm:text-base">Innovation</div>
-                  <p className="mt-2 text-xs leading-relaxed text-brand-ink/90 sm:text-sm">
-                    Cutting-edge technology for modern networking.
-                  </p>
-                </div>
-                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-4 sm:p-5">
-                  <div className="text-sm font-semibold tracking-tight text-brand-ink sm:text-base">Simplicity</div>
-                  <p className="mt-2 text-xs leading-relaxed text-brand-ink/90 sm:text-sm">
-                    Intuitive design that anyone can use instantly.
-                  </p>
-                </div>
-                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-4 sm:p-5">
-                  <div className="text-sm font-semibold tracking-tight text-brand-ink sm:text-base">Trust</div>
-                  <p className="mt-2 text-xs leading-relaxed text-brand-ink/90 sm:text-sm">
-                    Secure, reliable, and always available.
-                  </p>
-                </div>
-                <div className="rounded-[1.25rem] bg-brand-accent/30 border border-brand-accent/40 p-4 sm:p-5">
-                  <div className="text-sm font-semibold tracking-tight text-brand-ink sm:text-base">Growth</div>
-                  <p className="mt-2 text-xs leading-relaxed text-brand-ink/90 sm:text-sm">
-                    Tools that help your business expand.
-                  </p>
-                </div>
+                We are <span className="text-brand-ink/90">innovation</span>
               </div>
             </div>
           </motion.div>
@@ -620,12 +608,12 @@ function Plans() {
               >
                 <div
                   aria-hidden="true"
-                  className="absolute inset-y-0 left-3 sm:left-6 my-auto h-12 w-[3px] sm:w-[5px] rounded-full bg-gradient-to-b from-brand-accent to-brand-accent/70 transition-all duration-300 ease-out group-hover:h-14"
+                  className="absolute inset-y-0 left-2 sm:left-6 my-auto h-8 w-[2px] sm:h-12 sm:w-[4px] rounded-full bg-gradient-to-b from-brand-accent/60 to-brand-accent/40 transition-all duration-300 ease-out group-hover:h-10 sm:group-hover:h-14"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/0 via-white/0 to-white/5 opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="pl-5 sm:pl-7">
+                  <div className="pl-4 sm:pl-7">
                     <div className="text-xl font-semibold tracking-tight">{p.name}</div>
                     <div className="mt-1 text-sm text-white/70">Membership plan</div>
                   </div>
