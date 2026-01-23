@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: #ffffff;
+  --fg: #111111;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+::selection {
+  background: rgba(250, 204, 21, 0.35);
+}
+
+.btn-shine {
+  position: relative;
+  overflow: hidden;
+}
+
+.btn-shine::after {
+  content: '';
+  position: absolute;
+  inset: -40% -40% auto auto;
+  width: 140%;
+  height: 140%;
+  transform: translate3d(-20%, -10%, 0) rotate(25deg);
+  background: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0%,
+    rgba(255, 255, 255, 0.55) 20%,
+    rgba(255, 255, 255, 0) 45%
+  );
+  opacity: 0;
+  transition: opacity 300ms ease, transform 600ms cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.btn-shine:hover::after {
+  opacity: 0.55;
+  transform: translate3d(-55%, -25%, 0) rotate(25deg);
+}
+
+.pressable {
+  transform: translateZ(0);
+}
+
+.pressable:active {
+  transform: translateY(1px) scale(0.99);
+}
