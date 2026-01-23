@@ -653,12 +653,12 @@ function Plans() {
               >
                 <div
                   aria-hidden="true"
-                  className="absolute inset-y-0 left-4 sm:left-6 my-auto h-12 w-[5px] rounded-full bg-gradient-to-b from-brand-accent to-brand-accent/70 transition-all duration-300 ease-out group-hover:h-14"
+                  className="absolute inset-y-0 left-3 sm:left-6 my-auto h-12 w-[3px] sm:w-[5px] rounded-full bg-gradient-to-b from-brand-accent to-brand-accent/70 transition-all duration-300 ease-out group-hover:h-14"
                 />
                 <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/0 via-white/0 to-white/5 opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
 
                 <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="pl-6 sm:pl-7">
+                  <div className="pl-5 sm:pl-7">
                     <div className="text-xl font-semibold tracking-tight">{p.name}</div>
                     <div className="mt-1 text-sm text-white/70">Membership plan</div>
                   </div>
