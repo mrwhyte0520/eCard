@@ -78,10 +78,10 @@ function Nav() {
           </div>
 
           <div className="hidden items-center gap-8 text-sm text-brand-muted md:flex">
-            <a className="group relative font-medium text-brand-ink" href="#">
+            <Link className="group relative font-medium text-brand-ink" href="/">
               Home
               <span className="absolute -bottom-4 left-0 h-[3px] w-full rounded-full bg-brand-accent" />
-            </a>
+            </Link>
             <Link className="group relative font-medium hover:text-brand-ink transition-colors" href="/about">
               About Us
               <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
