@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MotionConfig, motion } from 'framer-motion';
@@ -20,6 +21,8 @@ function DarkButton({ children }: { children: React.ReactNode }) {
 }
 
 export default function AboutPage() {
+  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+
   return (
     <MotionConfig reducedMotion="user">
       <div className="min-h-screen bg-white">
@@ -40,10 +43,6 @@ export default function AboutPage() {
                   About Us
                   <span className="absolute -bottom-4 left-0 h-[3px] w-full rounded-full bg-brand-accent" />
                 </span>
-                <Link className="group relative font-medium hover:text-brand-ink transition-colors" href="/features">
-                  Features
-                  <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
-                </Link>
                 <Link className="group relative font-medium hover:text-brand-ink transition-colors scroll-smooth" href="/#plans">
                   Plans
                   <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
@@ -53,7 +52,41 @@ export default function AboutPage() {
                   <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
                 </Link>
               </div>
+
+              {/* Mobile menu button */}
+              <div className="flex items-center md:hidden">
+                <button 
+                  className="pressable flex h-10 w-10 items-center justify-center rounded-xl border border-brand-line bg-white text-brand-ink shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+                  onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
+                >
+                  <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+                  </svg>
+                </button>
+              </div>
             </div>
+
+            {/* Mobile menu */}
+            {mobileMenuOpen && (
+              <div className="md:hidden">
+                <div className="border-t border-brand-line bg-white/95 backdrop-blur">
+                  <div className="px-4 py-3 space-y-2">
+                    <Link className="block py-2 text-base font-medium text-brand-ink" href="/" onClick={() => setMobileMenuOpen(false)}>
+                      Home
+                    </Link>
+                    <Link className="block py-2 text-base font-medium text-brand-ink" href="/about" onClick={() => setMobileMenuOpen(false)}>
+                      About Us
+                    </Link>
+                    <a className="block py-2 text-base font-medium text-brand-ink" href="/#plans" onClick={() => setMobileMenuOpen(false)}>
+                      Plans
+                    </a>
+                    <a className="block py-2 text-base font-medium text-brand-ink" href="#support" onClick={() => setMobileMenuOpen(false)}>
+                      Support
+                    </a>
+                  </div>
+                </div>
+              </div>
+            )}
           </Container>
         </div>
 
@@ -115,64 +148,11 @@ export default function AboutPage() {
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
-                className="mt-8 overflow-hidden rounded-[1.75rem] border border-black/10 bg-white shadow-soft"
+                className="mt-8 overflow-hidden rounded-[1.75rem] border border-brand-accent/20 bg-brand-accent/5 shadow-soft"
               >
-                <div className="bg-black px-8 py-10 text-white sm:px-10">
-                  <div className="text-balance text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
-                    We are tecnology, we are <span className="text-brand-accent">networking</span>.
-                  </div>
-                </div>
-
-                <div className="relative bg-white">
-                  <div className="relative h-[240px] overflow-hidden bg-black/10 sm:h-[280px]">
-                    <div className="absolute inset-0 bg-gradient-to-b from-black/35 via-black/20 to-black/30" />
-                    <div className="absolute inset-0">
-                      <Image
-                        src="/1519bfe53d565a21d38023faf07e0d02.jpg"
-                        alt=""
-                        fill
-                        className="object-cover"
-                        priority={false}
-                      />
-                    </div>
-                    <div className="absolute inset-0 flex items-center justify-center px-6">
-                      <div className="text-6xl font-medium tracking-tight text-white/90 sm:text-7xl lg:text-8xl">
-                        Share easy
-                      </div>
-                    </div>
-                  </div>
-
-                  <div className="pointer-events-none absolute right-3 top-[160px] hidden -translate-y-1/2 flex-col gap-2 lg:flex">
-                    <div className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                    <div className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                    <div className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                  </div>
-
-                  <div className="grid gap-4 p-6 sm:p-8 lg:grid-cols-4">
-                    <div className="rounded-[1.25rem] bg-black/5 p-6">
-                      <div className="text-base font-semibold tracking-tight text-brand-ink">Innovation</div>
-                      <p className="mt-3 text-sm leading-relaxed text-brand-muted">
-                        We continuously improve to meet tomorrow’s challenges.
-                      </p>
-                    </div>
-                    <div className="rounded-[1.25rem] bg-black/5 p-6">
-                      <div className="text-base font-semibold tracking-tight text-brand-ink">Simplicity</div>
-                      <p className="mt-3 text-sm leading-relaxed text-brand-muted">
-                        We create intuitive and user-friendly experiences.
-                      </p>
-                    </div>
-                    <div className="rounded-[1.25rem] bg-black/5 p-6">
-                      <div className="text-base font-semibold tracking-tight text-brand-ink">Trust</div>
-                      <p className="mt-3 text-sm leading-relaxed text-brand-muted">
-                        We value transparency, data privacy, and reliability.
-                      </p>
-                    </div>
-                    <div className="rounded-[1.25rem] bg-black/5 p-6">
-                      <div className="text-base font-semibold tracking-tight text-brand-ink">Empowerment</div>
-                      <p className="mt-3 text-sm leading-relaxed text-brand-muted">
-                        We equip our users with tools to stand out and succeed.
-                      </p>
-                    </div>
+                <div className="bg-brand-accent px-4 py-8 text-brand-ink sm:px-6 sm:py-10">
+                  <div className="text-balance text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">
+                    We are <span className="text-brand-ink/90">innovation</span>
                   </div>
                 </div>
               </motion.div>
@@ -244,12 +224,7 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="pointer-events-none absolute right-3 top-1/2 hidden -translate-y-1/2 flex-col gap-2 lg:flex">
-                  <div className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                </div>
-              </motion.div>
+                              </motion.div>
 
               <motion.div
                 initial={{ opacity: 0, y: 25 }}
@@ -300,9 +275,6 @@ export default function AboutPage() {
                       <Link className="block border-b border-black/10 pb-3" href="/about">
                         About Us
                       </Link>
-                      <Link className="block border-b border-black/10 pb-3" href="/#features">
-                        Features
-                      </Link>
                       <Link className="block border-b border-black/10 pb-3" href="/#plans">
                         Plans
                       </Link>
@@ -337,48 +309,6 @@ export default function AboutPage() {
                   </div>
 
                   <div>
-                    <div className="text-xs font-semibold tracking-[0.2em] text-brand-ink">FEATURES</div>
-                    <div className="mt-4 space-y-3 text-sm text-brand-ink">
-                      <a className="block border-b border-black/10 pb-3" href="#">
-                        QR Profile
-                      </a>
-                      <a className="block border-b border-black/10 pb-3" href="#">
-                        Lead Generation
-                      </a>
-                      <a className="block border-b border-black/10 pb-3" href="#">
-                        Save Contact
-                      </a>
-                      <a className="block border-b border-black/10 pb-3" href="#">
-                        Customizer
-                      </a>
-                      <a className="block border-b border-black/10 pb-3" href="#">
-                        Templates
-                      </a>
-                      <a className="block border-b border-black/10 pb-3" href="#">
-                        Apple Wallet
-                      </a>
-                      <a className="block" href="#">
-                        Google Wallet
-                      </a>
-                    </div>
-                  </div>
-
-                  <div>
-                    <div className="text-xs font-semibold tracking-[0.2em] text-brand-ink">FOLLOW US</div>
-                    <div className="mt-4 space-y-3 text-sm text-brand-ink">
-                      <a className="block border-b border-black/10 pb-3" href="#">
-                        Facebook
-                      </a>
-                      <a className="block border-b border-black/10 pb-3" href="#">
-                        Instagram
-                      </a>
-                      <a className="block" href="#">
-                        X (Twitter)
-                      </a>
-                    </div>
-                  </div>
-
-                  <div>
                     <div className="text-xs font-semibold tracking-[0.2em] text-brand-ink">CONTACT US</div>
                     <div className="mt-4 space-y-3 text-sm text-brand-ink">
                       <a className="block border-b border-black/10 pb-3" href="#">
@@ -394,12 +324,7 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                <div className="pointer-events-none absolute right-3 top-10 hidden flex-col gap-2 lg:flex">
-                  <div className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                  <div className="h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                </div>
-              </motion.footer>
+                              </motion.footer>
             </Container>
           </section>
         </main>

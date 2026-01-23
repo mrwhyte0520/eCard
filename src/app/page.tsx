@@ -89,10 +89,6 @@ function Nav() {
               About Us
               <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
             </Link>
-            <Link className="group relative font-medium hover:text-brand-ink transition-colors" href="/features">
-              Features
-              <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
-            </Link>
             <Link className="group relative font-medium hover:text-brand-ink transition-colors scroll-smooth" href="#plans">
               Plans
               <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
@@ -126,9 +122,6 @@ function Nav() {
                 </Link>
                 <Link className="block py-2 text-base font-medium text-brand-ink" href="/about" onClick={() => setMobileMenuOpen(false)}>
                   About Us
-                </Link>
-                <Link className="block py-2 text-base font-medium text-brand-ink" href="/features" onClick={() => setMobileMenuOpen(false)}>
-                  Features
                 </Link>
                 <a className="block py-2 text-base font-medium text-brand-ink" href="#plans" onClick={() => setMobileMenuOpen(false)}>
                   Plans
@@ -174,263 +167,6 @@ function Hero() {
   );
 }
 
-function FeatureGridSix() {
-  const items = [
-    {
-      title: 'QR Profile',
-      body: 'Showcase your digital identity with a dynamic QR that adapts to your brand, content, and purpose.',
-      note: 'Instant access to your profile from any device, anywhere.',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-          <path
-            d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M20 21a8 8 0 1 0-16 0"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      ),
-    },
-    {
-      title: 'Ease Sharing',
-      body: 'Share your contact and brand in seconds with just a tap or scan — no app required.',
-      note: 'Designed for efficiency, built for speed.',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-          <path
-            d="M16 8a3 3 0 1 0-2.83-4"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M6 14a3 3 0 1 0 2.83 4"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M8.6 16.2 15.4 12.8"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M15.4 11.2 8.6 7.8"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      ),
-    },
-    {
-      title: 'Quick Save',
-      body: 'Enable contacts to instantly save your details into their phone or CRM.',
-      note: 'One tap is all it takes to stay remembered.',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-          <path
-            d="M9 11.5 11 13.5 15.5 9"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M12 21a9 9 0 1 0-9-9"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      ),
-    },
-    {
-      title: 'Manage Leads',
-      body: 'Collect, organize, and follow up with contacts using integrated lead management tools.',
-      note: 'Never lose a connection again.',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-          <path
-            d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M9 11a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M22 21v-2a4 4 0 0 0-3-3.87"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path
-            d="M16 3.13a4 4 0 0 1 0 7.75"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-      ),
-    },
-    {
-      title: 'Analytics and Reports',
-      body: 'Track engagement, link clicks, and connection data with real‑time reporting tools.',
-      note: 'Know what works — optimize your results.',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-          <path d="M4 20V10" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          <path d="M10 20V4" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          <path d="M16 20v-8" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-          <path d="M22 20v-13" stroke="currentColor" strokeWidth="2" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-    {
-      title: 'Custom Design',
-      body: 'Tailor every element — from colors to fonts — for a link page that matches your personal style.',
-      note: 'Your brand, your rules, your look.',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-          <path
-            d="M12 21a9 9 0 1 0-9-9 9 9 0 0 0 9 9Z"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path d="M9 10.5h.01" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-          <path d="M13 8.5h.01" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-          <path d="M15 14h.01" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-  ];
-
-  return (
-    <section className="pt-14 pb-4 sm:pt-16 sm:pb-4">
-      <Container>
-        <h2 className="mb-10 text-center text-5xl font-medium tracking-tight text-brand-ink sm:text-6xl">Features</h2>
-        <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-3">
-          {items.map((i, idx) => (
-            <motion.div
-              key={i.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.25, 1, 0.5, 1] }}
-              className="pressable group overflow-hidden rounded-[2.25rem] border-2 border-black bg-white shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
-            >
-              <div className="flex h-full min-h-[250px] flex-col p-7">
-                <div className="flex items-center gap-3 text-brand-ink">
-                  <div className="grid h-10 w-10 place-items-center rounded-2xl bg-black/5">{i.icon}</div>
-                  <div className="text-xl font-semibold tracking-tight">{i.title}</div>
-                </div>
-
-                <div className="mt-5 h-px w-full bg-black/10" />
-
-                <p className="mt-5 text-sm leading-relaxed text-brand-muted">{i.body}</p>
-                <p className="mt-4 text-sm italic text-brand-muted">{i.note}</p>
-
-                <div className="mt-auto pt-7">
-                  <button className="pressable btn-shine inline-flex items-center justify-center gap-2 rounded-full bg-brand-ink px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-soft">
-                    See more <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-function WalletExtras() {
-  const items = [
-    {
-      title: 'Support Media Files',
-      body: 'Upload and showcase images, videos, PDFs, and more right on your biolink.',
-      note: 'Bring your content to life with rich media.',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-          <path
-            d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5Z"
-            stroke="currentColor"
-            strokeWidth="2"
-          />
-          <path
-            d="M8 13l2.5-2.5 3.5 3.5 2-2L20 16"
-            stroke="currentColor"
-            strokeWidth="2"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-          <path d="M9 8h.01" stroke="currentColor" strokeWidth="3" strokeLinecap="round" />
-        </svg>
-      ),
-    },
-  ];
-
-  return (
-    <section className="pt-0 pb-14 sm:pt-0 sm:pb-16">
-      <Container>
-        <div className="grid gap-4 lg:grid-cols-1">
-          {items.map((i, idx) => (
-            <motion.div
-              key={i.title}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.25, 1, 0.5, 1] }}
-              className="pressable group overflow-hidden rounded-[2.25rem] border-2 border-black bg-white shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
-            >
-              <div className="flex h-full min-h-[250px] flex-col p-7">
-                <div className="flex items-center gap-3 text-brand-ink">
-                  <div className="grid h-10 w-10 place-items-center rounded-2xl bg-black/5">{i.icon}</div>
-                  <div className="text-xl font-semibold tracking-tight">{i.title}</div>
-                </div>
-
-                <div className="mt-5 h-px w-full bg-black/10" />
-
-                <p className="mt-5 text-sm leading-relaxed text-brand-muted">{i.body}</p>
-                <p className="mt-4 text-sm italic text-brand-muted">{i.note}</p>
-
-                <div className="mt-auto pt-7">
-                  <button className="pressable btn-shine inline-flex items-center justify-center gap-2 rounded-full bg-brand-ink px-6 py-2.5 text-sm font-semibold text-white transition-all duration-300 ease-out hover:-translate-y-0.5 hover:shadow-soft">
-                    See more <span className="transition-transform duration-300 group-hover:translate-x-0.5">→</span>
-                  </button>
-                </div>
-              </div>
-            </motion.div>
-          ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
-
 function Steps() {
   const steps = [
     {
@@ -468,108 +204,6 @@ function Steps() {
               <p className="mt-3 text-sm leading-relaxed text-brand-muted">{s.body}</p>
             </motion.div>
           ))}
-        </div>
-      </Container>
-    </section>
-  );
-}
-
-function Features() {
-  return (
-    <section id="features" className="py-14 sm:py-16">
-      <Container>
-        <div className="flex flex-col gap-8">
-          <h2 className="text-center text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl">Features</h2>
-
-          <div className="grid gap-8 lg:grid-cols-2">
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
-              className="relative overflow-hidden rounded-[2rem] bg-gradient-to-b from-brand-ink to-black px-6 py-10 text-white shadow-lift sm:px-10"
-            >
-              <div className="pointer-events-none absolute inset-0 opacity-90" style={{ background: 'radial-gradient(900px 300px at 20% 20%, rgba(250,204,21,0.18), rgba(250,204,21,0) 60%)' }} />
-
-              <div className="relative">
-                <h3 className="text-balance text-3xl font-semibold tracking-tight sm:text-4xl">
-                  Powerful Digital Business
-                  <br />
-                  Card Solutions
-                </h3>
-                <p className="mt-4 text-lg text-white/80">Transform your networking with cutting-edge features</p>
-
-                <div className="mt-8 space-y-4">
-                  <div className="flex items-start gap-3">
-                    <div className="mt-1 h-2 w-2 rounded-full bg-brand-accent" />
-                    <div>
-                      <div className="font-semibold text-white">QR Profile Generation</div>
-                      <div className="text-sm text-white/70">Create dynamic QR codes that adapt to your brand</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="mt-1 h-2 w-2 rounded-full bg-brand-accent" />
-                    <div>
-                      <div className="font-semibold text-white">Instant Contact Sharing</div>
-                      <div className="text-sm text-white/70">Share your profile with a single tap or scan</div>
-                    </div>
-                  </div>
-                  <div className="flex items-start gap-3">
-                    <div className="mt-1 h-2 w-2 rounded-full bg-brand-accent" />
-                    <div>
-                      <div className="font-semibold text-white">Lead Management</div>
-                      <div className="text-sm text-white/70">Collect and organize contacts efficiently</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, y: 25 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.9, delay: 0.1, ease: [0.25, 1, 0.5, 1] }}
-              className="relative overflow-hidden rounded-[2rem] border border-black/10 bg-white p-8 shadow-lift"
-            >
-              <h3 className="text-balance text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">
-                Advanced Analytics
-                <br />
-                & Insights
-              </h3>
-              <p className="mt-4 text-lg text-brand-muted">Track performance and optimize your networking strategy</p>
-
-              <div className="mt-8 grid gap-6 sm:grid-cols-2">
-                <div className="rounded-2xl border border-black/10 bg-brand-soft p-4">
-                  <div className="text-2xl font-bold text-brand-accent">2.5K+</div>
-                  <div className="text-sm text-brand-muted">Profile Views</div>
-                </div>
-                <div className="rounded-2xl border border-black/10 bg-brand-soft p-4">
-                  <div className="text-2xl font-bold text-brand-accent">180+</div>
-                  <div className="text-sm text-brand-muted">New Contacts</div>
-                </div>
-                <div className="rounded-2xl border border-black/10 bg-brand-soft p-4">
-                  <div className="text-2xl font-bold text-brand-accent">89%</div>
-                  <div className="text-sm text-brand-muted">Engagement Rate</div>
-                </div>
-                <div className="rounded-2xl border border-black/10 bg-brand-soft p-4">
-                  <div className="text-2xl font-bold text-brand-accent">24/7</div>
-                  <div className="text-sm text-brand-muted">Real-time Updates</div>
-                </div>
-              </div>
-            </motion.div>
-          </div>
-
-          <motion.div
-            initial={{ opacity: 0, y: 25 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
-            className="mt-8 overflow-hidden rounded-[1.75rem] border border-brand-accent/20 bg-brand-accent/5 shadow-soft"
-          >
-            <div className="bg-brand-accent px-4 py-8 text-brand-ink sm:px-6 sm:py-10">
-              <div className="text-balance text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">
-                We are <span className="text-brand-ink/90">innovation</span>
-              </div>
-            </div>
-          </motion.div>
         </div>
       </Container>
     </section>
@@ -641,7 +275,6 @@ function Footer() {
       items: [
         { label: 'Home', href: '#' },
         { label: 'About Us', href: '#' },
-        { label: 'Features', href: '#features' },
         { label: 'Plans', href: '#plans' },
         { label: 'Resources', href: '#' },
       ],
@@ -655,16 +288,6 @@ function Footer() {
         { label: 'Lawyer', href: '#' },
         { label: 'Driver', href: '#' },
         { label: 'Gym', href: '#' },
-      ],
-    },
-    {
-      title: 'Features',
-      items: [
-        { label: 'QR Profile', href: '#' },
-        { label: 'Lead Generation', href: '#' },
-        { label: 'Save Contact', href: '#' },
-        { label: 'Customizer', href: '#' },
-        { label: 'Templates', href: '#' },
       ],
     },
     {
@@ -740,7 +363,6 @@ export default function Page() {
         <Nav />
         <Hero />
         <Steps />
-        <FeatureGridSix />
         <Plans />
         <Footer />
       </div>
