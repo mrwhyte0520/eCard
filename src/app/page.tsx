@@ -352,45 +352,12 @@ function WalletExtras() {
         </svg>
       ),
     },
-    {
-      title: 'Apple Wallet',
-      body: 'Add your eCard to Apple Wallet for instant access and professional sharing.',
-      note: 'Modern, sleek, and always with you.',
-      icon: (
-        <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-          <path
-            d="M16.7 13.1c0 2.8 2.5 3.7 2.5 3.7s-1.9 5-4.4 5c-1.2 0-2.1-.7-3.3-.7s-2.1.7-3.4.7c-2.3 0-5.1-4.7-5.1-8.9C3 9.9 5.2 8 7.4 8c1.2 0 2.3.8 3.1.8s2.1-.9 3.6-.9c.6 0 2.3.1 3.4 1.8-.1.1-2 1.1-2 3.4Z"
-            fill="currentColor"
-            opacity="0.9"
-          />
-          <path
-            d="M14.7 2c.2 1.3-.4 2.6-1.2 3.4-.9.9-2.3 1.5-3.6 1.4-.2-1.2.4-2.5 1.2-3.3C12 2.6 13.4 2 14.7 2Z"
-            fill="currentColor"
-            opacity="0.9"
-          />
-        </svg>
-      ),
-    },
-    {
-      title: 'Google Wallet',
-      body: 'Integrate your digital card into Google Wallet for fast, contactless sharing on Android devices.',
-      note: 'Smart contact sharing built into your phone.',
-      icon: (
-        <Image
-          src="/google-wallet.png"
-          alt="Google Wallet"
-          width={24}
-          height={24}
-          className="h-6 w-6"
-        />
-      ),
-    },
   ];
 
   return (
     <section className="pt-0 pb-14 sm:pt-0 sm:pb-16">
       <Container>
-        <div className="grid gap-4 lg:grid-cols-3">
+        <div className="grid gap-4 lg:grid-cols-1">
           {items.map((i, idx) => (
             <motion.div
               key={i.title}
@@ -710,8 +677,6 @@ function Footer() {
         { label: 'Save Contact', href: '#' },
         { label: 'Customizer', href: '#' },
         { label: 'Templates', href: '#' },
-        { label: 'Apple Wallet', href: '#' },
-        { label: 'Google Wallet', href: '#' },
       ],
     },
     {
