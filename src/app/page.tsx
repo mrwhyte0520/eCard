@@ -741,7 +741,6 @@ export default function Page() {
         <Hero />
         <Steps />
         <FeatureGridSix />
-        <WalletExtras />
         <Plans />
         <Footer />
       </div>
