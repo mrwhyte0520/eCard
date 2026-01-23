@@ -309,15 +309,30 @@ export default function AboutPage() {
                   </div>
 
                   <div>
+                    <div className="text-xs font-semibold tracking-[0.2em] text-brand-ink">FOLLOW US</div>
+                    <div className="mt-4 space-y-3 text-sm text-brand-ink">
+                      <a className="block border-b border-black/10 pb-3" href="https://facebook.com" target="_blank" rel="noopener noreferrer">
+                        Facebook
+                      </a>
+                      <a className="block border-b border-black/10 pb-3" href="https://instagram.com" target="_blank" rel="noopener noreferrer">
+                        Instagram
+                      </a>
+                      <a className="block" href="https://twitter.com" target="_blank" rel="noopener noreferrer">
+                        X (Twitter)
+                      </a>
+                    </div>
+                  </div>
+
+                  <div>
                     <div className="text-xs font-semibold tracking-[0.2em] text-brand-ink">CONTACT US</div>
                     <div className="mt-4 space-y-3 text-sm text-brand-ink">
-                      <a className="block border-b border-black/10 pb-3" href="#">
+                      <a className="block border-b border-black/10 pb-3" href="mailto:hello@herlloecard.com">
                         Write Us
                       </a>
                       <a className="block border-b border-black/10 pb-3" href="#">
                         Support Chat
                       </a>
-                      <a className="block" href="#">
+                      <a className="block" href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer">
                         Support WhatsApp
                       </a>
                     </div>

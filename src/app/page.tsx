@@ -210,6 +210,226 @@ function Steps() {
   );
 }
 
+ function FeaturesSection() {
+   const items = [
+     {
+       title: 'QR Profile',
+       body: 'Showcase your digital identity with a dynamic QR that adapts to your brand, content, and purpose.',
+       note: 'Instant access to your profile from any device, anywhere.',
+       icon: (
+         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+           <path
+             d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+             strokeLinejoin="round"
+           />
+           <path
+             d="M20 21a8 8 0 0 0-16 0"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+             strokeLinejoin="round"
+           />
+         </svg>
+       ),
+     },
+     {
+       title: 'Ease Sharing',
+       body: 'Share your contact and brand in seconds with just a tap or scan — no app required.',
+       note: 'Designed for efficiency, built for speed.',
+       icon: (
+         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+           <path
+             d="M10 13a5 5 0 0 0 7.07 0l1.41-1.41a5 5 0 0 0-7.07-7.07L10.7 5"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+             strokeLinejoin="round"
+           />
+           <path
+             d="M14 11a5 5 0 0 0-7.07 0L5.52 12.41a5 5 0 0 0 7.07 7.07L13.3 19"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+             strokeLinejoin="round"
+           />
+         </svg>
+       ),
+     },
+     {
+       title: 'Quick Save',
+       body: 'Enable contacts to instantly save your details into their phone or CRM.',
+       note: 'One tap is all it takes to stay remembered.',
+       icon: (
+         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+           <path
+             d="M12 8v4l3 3"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+             strokeLinejoin="round"
+           />
+           <path
+             d="M21 12a9 9 0 1 1-9-9 9 9 0 0 1 9 9Z"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+             strokeLinejoin="round"
+           />
+         </svg>
+       ),
+     },
+     {
+       title: 'Manage Leads',
+       body: 'Collect, organize, and follow up with contacts using integrated lead management tools.',
+       note: 'Never lose a connection again.',
+       icon: (
+         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+           <path
+             d="M16 11a4 4 0 1 0-8 0"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+             strokeLinejoin="round"
+           />
+           <path
+             d="M3 21a9 9 0 0 1 18 0"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+             strokeLinejoin="round"
+           />
+         </svg>
+       ),
+     },
+     {
+       title: 'Analytics and Reports',
+       body: 'Track engagement, link clicks, and connection data with real-time reporting tools.',
+       note: 'Know what works — optimize your results.',
+       icon: (
+         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+           <path
+             d="M4 19V5"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+           />
+           <path
+             d="M8 19v-6"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+           />
+           <path
+             d="M12 19v-9"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+           />
+           <path
+             d="M16 19v-4"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+           />
+           <path
+             d="M20 19v-12"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+           />
+         </svg>
+       ),
+     },
+     {
+       title: 'Custom Design',
+       body: 'Tailor every element — from colors to fonts — for a link page that matches your personal style.',
+       note: 'Your brand, your rules, your look.',
+       icon: (
+         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+           <path
+             d="M12 3a9 9 0 1 0 9 9"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+           />
+           <path
+             d="M12 12h9"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+           />
+           <path
+             d="M12 12V3"
+             stroke="currentColor"
+             strokeWidth="2"
+             strokeLinecap="round"
+           />
+         </svg>
+       ),
+     },
+   ];
+
+   return (
+     <section className="relative py-14 sm:py-16">
+       <div
+         aria-hidden="true"
+         className="pointer-events-none absolute inset-0"
+         style={{
+           background:
+             'radial-gradient(900px 420px at 50% 0%, rgba(250,204,21,0.12), rgba(250,204,21,0) 60%)',
+         }}
+       />
+       <Container>
+         <div className="relative flex flex-col gap-8">
+           <motion.h2
+             initial={{ opacity: 0, y: 20 }}
+             animate={{ opacity: 1, y: 0 }}
+             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+             className="text-center text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl"
+           >
+             Features
+           </motion.h2>
+
+           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+             {items.map((item, idx) => (
+               <motion.div
+                 key={item.title}
+                 initial={{ opacity: 0, y: 18 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.8, delay: idx * 0.05, ease: [0.25, 1, 0.5, 1] }}
+                 className="rounded-[2rem] border border-black/40 bg-white/90 p-7 shadow-lift ring-1 ring-brand-accent/20"
+               >
+                 <div className="flex items-center gap-3">
+                   <div className="grid h-10 w-10 place-items-center rounded-full bg-brand-accent/10 text-brand-ink">
+                     {item.icon}
+                   </div>
+                   <div className="text-base font-semibold tracking-tight text-brand-ink">{item.title}</div>
+                 </div>
+
+                 <div className="mt-4 h-px w-full bg-black/10" />
+
+                 <p className="mt-4 text-sm leading-relaxed text-brand-muted">{item.body}</p>
+                 <p className="mt-4 text-sm italic leading-relaxed text-brand-muted">{item.note}</p>
+
+                 <button
+                   type="button"
+                   className="pressable mt-6 inline-flex items-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white"
+                 >
+                   See more
+                   <span aria-hidden="true">→</span>
+                 </button>
+               </motion.div>
+             ))}
+           </div>
+         </div>
+       </Container>
+     </section>
+   );
+ }
+
 function Plans() {
   const plans = [
     { name: 'Free', price: 'USD 0.00' },
@@ -273,8 +493,8 @@ function Footer() {
     {
       title: 'Links',
       items: [
-        { label: 'Home', href: '#' },
-        { label: 'About Us', href: '#' },
+        { label: 'Home', href: '/' },
+        { label: 'About Us', href: '/about' },
         { label: 'Plans', href: '#plans' },
         { label: 'Resources', href: '#' },
       ],
@@ -293,17 +513,17 @@ function Footer() {
     {
       title: 'Follow Us',
       items: [
-        { label: 'Facebook', href: '#' },
-        { label: 'Instagram', href: '#' },
-        { label: 'X (Twitter)', href: '#' },
+        { label: 'Facebook', href: 'https://facebook.com' },
+        { label: 'Instagram', href: 'https://instagram.com' },
+        { label: 'X (Twitter)', href: 'https://twitter.com' },
       ],
     },
     {
       title: 'Contact Us',
       items: [
-        { label: 'Write Us', href: '#' },
+        { label: 'Write Us', href: 'mailto:hello@herlloecard.com' },
         { label: 'Support Chat', href: '#' },
-        { label: 'Support WhatsApp', href: '#' },
+        { label: 'Support WhatsApp', href: 'https://wa.me/1234567890' },
       ],
     },
   ];
@@ -330,6 +550,8 @@ function Footer() {
                       key={i.label}
                       className="block text-brand-muted transition-colors hover:text-brand-ink"
                       href={i.href ?? '#'}
+                      target={i.href?.startsWith('http') ? '_blank' : undefined}
+                      rel={i.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
                     >
                       {i.label}
                     </a>
@@ -363,6 +585,7 @@ export default function Page() {
         <Nav />
         <Hero />
         <Steps />
+        <FeaturesSection />
         <Plans />
         <Footer />
       </div>
