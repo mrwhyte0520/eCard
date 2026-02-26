@@ -206,11 +206,11 @@ function TiltCard(
           cur.rx = lerp(cur.rx, tar.rx, 0.12);
           cur.ry = lerp(cur.ry, tar.ry, 0.12);
 
-          node.style.transform = `translate3d(0, -2px, 0) rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) scale(1.02)`;
+          node.style.transform = `translate3d(0, -2px, 0) rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) scale(var(--tiltScale))`;
 
           const settled = Math.abs(cur.rx - tar.rx) + Math.abs(cur.ry - tar.ry) < 0.02;
           if (settled && tar.rx === 0 && tar.ry === 0) {
-            node.style.transform = '';
+            node.style.transform = 'translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(var(--tiltScale))';
             currentRef.current.active = false;
             rafRef.current = null;
             return;
@@ -310,27 +310,41 @@ function Nav() {
     <div className="sticky top-0 z-50 border-b border-brand-line bg-white/90 backdrop-blur">
       <Container>
         <div className="flex h-16 items-center justify-between">
-          <div className="flex items-center gap-3">
-            <div className="grid h-9 w-9 place-items-center rounded-xl bg-brand-ink text-white">H</div>
+          <div className="group flex items-center gap-3">
+            <div className="relative h-9 w-9 overflow-hidden rounded-xl bg-brand-ink ring-1 ring-black/10 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-[1.04] group-hover:rotate-1 group-hover:shadow-[0_16px_40px_rgba(250,204,21,0.28)]">
+              <Image src="/logo.png" alt="Hello eCard" fill className="object-contain p-1 transition-transform duration-300 group-hover:scale-[1.03]" priority={false} />
+            </div>
             <span className="text-sm font-semibold tracking-tight text-brand-ink">Hello eCard</span>
           </div>
 
-          <div className="hidden items-center gap-6 text-sm text-brand-muted md:flex lg:gap-8">
-            <Link className="group relative font-medium text-brand-ink" href="/">
+          <div className="hidden items-center gap-2 text-sm text-brand-muted md:flex">
+            <Link
+              className="group relative rounded-full px-4 py-2 font-medium text-brand-ink transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-accent/15 hover:shadow-soft"
+              href="/"
+            >
               Home
-              <span className="absolute -bottom-4 left-0 h-[3px] w-full rounded-full bg-brand-accent" />
+              <span className="absolute inset-x-3 -bottom-0.5 h-[2px] rounded-full bg-brand-accent" />
             </Link>
-            <Link className="group relative font-medium hover:text-brand-ink transition-colors" href="/about">
+            <Link
+              className="group relative rounded-full px-4 py-2 font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-accent/15 hover:text-brand-ink hover:shadow-soft"
+              href="/about"
+            >
               About Us
-              <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
+              <span className="absolute inset-x-3 -bottom-0.5 h-[2px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]" />
             </Link>
-            <Link className="group relative font-medium hover:text-brand-ink transition-colors scroll-smooth" href="#plans">
+            <Link
+              className="group relative rounded-full px-4 py-2 font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-accent/15 hover:text-brand-ink hover:shadow-soft"
+              href="#plans"
+            >
               Plans
-              <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
+              <span className="absolute inset-x-3 -bottom-0.5 h-[2px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]" />
             </Link>
-            <a className="group relative font-medium hover:text-brand-ink transition-colors scroll-smooth" href="#support">
+            <a
+              className="group relative rounded-full px-4 py-2 font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-accent/15 hover:text-brand-ink hover:shadow-soft"
+              href="#support"
+            >
               Support
-              <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
+              <span className="absolute inset-x-3 -bottom-0.5 h-[2px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]" />
             </a>
           </div>
 
@@ -352,16 +366,16 @@ function Nav() {
           <div className="md:hidden">
             <div className="border-t border-brand-line bg-white/95 backdrop-blur">
               <div className="px-4 py-3 space-y-2">
-                <Link className="block py-2 text-base font-medium text-brand-ink" href="/" onClick={() => setMobileMenuOpen(false)}>
+                <Link className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10" href="/" onClick={() => setMobileMenuOpen(false)}>
                   Home
                 </Link>
-                <Link className="block py-2 text-base font-medium text-brand-ink" href="/about" onClick={() => setMobileMenuOpen(false)}>
+                <Link className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10" href="/about" onClick={() => setMobileMenuOpen(false)}>
                   About Us
                 </Link>
-                <a className="block py-2 text-base font-medium text-brand-ink" href="#plans" onClick={() => setMobileMenuOpen(false)}>
+                <a className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10" href="#plans" onClick={() => setMobileMenuOpen(false)}>
                   Plans
                 </a>
-                <a className="block py-2 text-base font-medium text-brand-ink" href="#support" onClick={() => setMobileMenuOpen(false)}>
+                <a className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10" href="#support" onClick={() => setMobileMenuOpen(false)}>
                   Support
                 </a>
               </div>
@@ -765,11 +779,13 @@ function Footer() {
   ];
 
   return (
-    <footer id="support" className="relative overflow-hidden bg-black py-12 text-white">
+    <footer id="support" className="relative overflow-hidden bg-black/75 py-12 text-white backdrop-blur">
       <Container>
         <div className="grid min-w-0 gap-10 md:grid-cols-[220px_1fr]">
           <div className="flex items-start gap-3">
-            <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-ink text-white">H</div>
+            <div className="relative h-12 w-12 overflow-hidden rounded-2xl bg-brand-ink">
+              <Image src="/logo.png" alt="Hello eCard" fill className="object-contain p-1.5" priority={false} />
+            </div>
             <div>
               <div className="text-base font-semibold tracking-tight text-white">Hello eCard</div>
               <div className="mt-1 text-sm text-white/70">Create your digital profile in seconds.</div>

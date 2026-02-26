@@ -68,11 +68,11 @@ function TiltCard(
                 cur.rx = lerp(cur.rx, tar.rx, 0.12);
                 cur.ry = lerp(cur.ry, tar.ry, 0.12);
 
-                node.style.transform = `translate3d(0, -2px, 0) rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) scale(1.02)`;
+                node.style.transform = `translate3d(0, -2px, 0) rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) scale(var(--tiltScale))`;
 
                 const settled = Math.abs(cur.rx - tar.rx) + Math.abs(cur.ry - tar.ry) < 0.02;
                 if (settled && tar.rx === 0 && tar.ry === 0) {
-                  node.style.transform = '';
+                  node.style.transform = 'translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(var(--tiltScale))';
                   currentRef.current.active = false;
                   rafRef.current = null;
                   return;
@@ -133,27 +133,38 @@ export default function AboutPage() {
         <div className="sticky top-0 z-50 border-b border-brand-line bg-white/90 backdrop-blur">
           <Container>
             <div className="flex h-16 items-center justify-between">
-              <Link className="flex items-center gap-3" href="/">
-                <div className="grid h-9 w-9 place-items-center rounded-xl bg-brand-ink text-white">H</div>
+              <Link className="group flex items-center gap-3" href="/">
+                <div className="relative h-9 w-9 overflow-hidden rounded-xl bg-brand-ink ring-1 ring-black/10 transition-all duration-300 group-hover:-translate-y-0.5 group-hover:scale-[1.04] group-hover:rotate-1 group-hover:shadow-[0_16px_40px_rgba(250,204,21,0.28)]">
+                  <Image src="/logo.png" alt="Hello eCard" fill className="object-contain p-1 transition-transform duration-300 group-hover:scale-[1.03]" priority={false} />
+                </div>
                 <span className="text-sm font-semibold tracking-tight text-brand-ink">Hello eCard</span>
               </Link>
 
-              <div className="hidden items-center gap-8 text-sm text-brand-muted md:flex">
-                <Link className="group relative font-medium hover:text-brand-ink transition-colors" href="/">
+              <div className="hidden items-center gap-2 text-sm text-brand-muted md:flex">
+                <Link
+                  className="group relative rounded-full px-4 py-2 font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-accent/15 hover:text-brand-ink hover:shadow-soft"
+                  href="/"
+                >
                   Home
-                  <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute inset-x-3 -bottom-0.5 h-[2px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]" />
                 </Link>
-                <span className="group relative font-medium text-brand-ink">
+                <span className="group relative rounded-full px-4 py-2 font-medium text-brand-ink">
                   About Us
-                  <span className="absolute -bottom-4 left-0 h-[3px] w-full rounded-full bg-brand-accent" />
+                  <span className="absolute inset-x-3 -bottom-0.5 h-[2px] rounded-full bg-brand-accent" />
                 </span>
-                <Link className="group relative font-medium hover:text-brand-ink transition-colors scroll-smooth" href="/#plans">
+                <Link
+                  className="group relative rounded-full px-4 py-2 font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-accent/15 hover:text-brand-ink hover:shadow-soft"
+                  href="/#plans"
+                >
                   Plans
-                  <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute inset-x-3 -bottom-0.5 h-[2px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]" />
                 </Link>
-                <Link className="group relative font-medium hover:text-brand-ink transition-colors scroll-smooth" href="#support">
+                <Link
+                  className="group relative rounded-full px-4 py-2 font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-accent/15 hover:text-brand-ink hover:shadow-soft"
+                  href="/#support"
+                >
                   Support
-                  <span className="absolute -bottom-4 left-0 h-[3px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-full" />
+                  <span className="absolute inset-x-3 -bottom-0.5 h-[2px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]" />
                 </Link>
               </div>
 
@@ -175,16 +186,32 @@ export default function AboutPage() {
               <div className="md:hidden">
                 <div className="border-t border-brand-line bg-white/95 backdrop-blur">
                   <div className="px-4 py-3 space-y-2">
-                    <Link className="block py-2 text-base font-medium text-brand-ink" href="/" onClick={() => setMobileMenuOpen(false)}>
+                    <Link
+                      className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10"
+                      href="/"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
                       Home
                     </Link>
-                    <Link className="block py-2 text-base font-medium text-brand-ink" href="/about" onClick={() => setMobileMenuOpen(false)}>
+                    <Link
+                      className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10"
+                      href="/about"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
                       About Us
                     </Link>
-                    <a className="block py-2 text-base font-medium text-brand-ink" href="/#plans" onClick={() => setMobileMenuOpen(false)}>
+                    <a
+                      className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10"
+                      href="/#plans"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
                       Plans
                     </a>
-                    <a className="block py-2 text-base font-medium text-brand-ink" href="#support" onClick={() => setMobileMenuOpen(false)}>
+                    <a
+                      className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10"
+                      href="#support"
+                      onClick={() => setMobileMenuOpen(false)}
+                    >
                       Support
                     </a>
                   </div>
