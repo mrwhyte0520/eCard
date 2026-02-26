@@ -21,7 +21,7 @@ function DarkButton({ children }: { children: React.ReactNode }) {
 
 export default function FeaturesPage() {
   return (
-    <div className="min-h-screen bg-white">
+    <div className="min-h-screen bg-transparent">
       <div className="sticky top-0 z-50 border-b border-brand-line bg-white/90 backdrop-blur">
         <Container>
           <div className="flex h-16 items-center justify-between">
@@ -67,7 +67,7 @@ export default function FeaturesPage() {
             >
               <div className="grid items-stretch gap-0 lg:grid-cols-2">
                 <div className="px-8 py-10 sm:px-10 sm:py-12">
-                  <div className="text-5xl font-medium tracking-tight text-brand-ink sm:text-6xl">
+                  <div className="font-display text-5xl font-medium tracking-tight text-brand-ink sm:text-6xl">
                     <div className="text-brand-ink/70">More</div>
                     <div>Features</div>
                   </div>
@@ -96,7 +96,7 @@ export default function FeaturesPage() {
               className="mt-8 overflow-hidden rounded-[1.75rem] border border-black/10 bg-white shadow-soft"
             >
               <div className="bg-black px-8 py-10 text-white sm:px-10">
-                <div className="text-balance text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
+                <div className="font-display text-balance text-4xl font-medium tracking-tight sm:text-5xl lg:text-6xl">
                   We are <span className="text-brand-accent">innovation</span>, we are <span className="text-brand-accent">connection</span>.
                 </div>
               </div>
@@ -154,7 +154,7 @@ export default function FeaturesPage() {
         <section className="py-14 sm:py-16">
           <Container>
             <div className="flex flex-col gap-8">
-              <h2 className="text-center text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl">Features</h2>
+              <h2 className="font-display text-center text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl">Features</h2>
 
               <div className="grid gap-8 lg:grid-cols-2">
                 <motion.div

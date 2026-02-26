@@ -1,6 +1,6 @@
 'use client';
 
-import { useState } from 'react';
+import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { MotionConfig, motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -13,11 +13,246 @@ function Container({ children }: { children: React.ReactNode }) {
   return <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">{children}</div>;
 }
 
+function usePrefersReducedMotion() {
+  const [reduced, setReduced] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return;
+    const media = window.matchMedia('(prefers-reduced-motion: reduce)');
+    const update = () => setReduced(media.matches);
+    update();
+    if (media.addEventListener) {
+      media.addEventListener('change', update);
+      return () => media.removeEventListener('change', update);
+    }
+    media.addListener(update);
+    return () => media.removeListener(update);
+  }, []);
+
+  return reduced;
+}
+
+function TypewriterText({
+  text,
+  speedMs = 34,
+  startDelayMs = 200,
+  className,
+}: {
+  text: string;
+  speedMs?: number;
+  startDelayMs?: number;
+  className?: string;
+}) {
+  const reducedMotion = usePrefersReducedMotion();
+  const [shown, setShown] = useState(reducedMotion ? text : '');
+
+  useEffect(() => {
+    if (reducedMotion) {
+      setShown(text);
+      return;
+    }
+
+    let idx = 0;
+    setShown('');
+    const timeout = window.setTimeout(() => {
+      const timer = window.setInterval(() => {
+        idx += 1;
+        setShown(text.slice(0, idx));
+        if (idx >= text.length) {
+          window.clearInterval(timer);
+        }
+      }, speedMs);
+    }, startDelayMs);
+
+    return () => {
+      window.clearTimeout(timeout);
+    };
+  }, [reducedMotion, speedMs, startDelayMs, text]);
+
+  const done = shown.length >= text.length;
+
+  return (
+    <span className={className} style={{ whiteSpace: 'pre-line' }}>
+      {shown}
+      {!done && <span aria-hidden="true" className="type-caret" />}
+    </span>
+  );
+}
+
+function SectionDivider() {
+  return (
+    <section className="group relative my-10 overflow-hidden bg-black py-10 sm:my-14 sm:py-14">
+      <div className="absolute inset-0">
+        <Image
+          src="/deo.png"
+          alt=""
+          fill
+          className="object-cover opacity-95 transition-transform duration-700 ease-out group-hover:scale-[1.02] [filter:saturate(1.2)_contrast(1.12)]"
+          priority={false}
+        />
+        <div className="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60" />
+        <div
+          className="absolute inset-0"
+          style={{ background: 'radial-gradient(900px 320px at 20% 30%, rgba(250,204,21,0.18), rgba(250,204,21,0) 62%)' }}
+        />
+        <div className="absolute inset-0 opacity-70 [background:radial-gradient(700px_240px_at_80%_60%,rgba(255,255,255,0.10),rgba(255,255,255,0)_65%)]" />
+      </div>
+
+      <Container>
+        <div className="relative">
+          <div aria-hidden="true" className="pointer-events-none absolute -inset-6 rounded-[2.75rem] opacity-80 blur-2xl" style={{ background: 'radial-gradient(700px 260px at 25% 35%, rgba(250,204,21,0.18), rgba(250,204,21,0) 62%)' }} />
+          <TiltCard className="relative grid gap-6 rounded-[2.25rem] border border-white/15 bg-white/7 p-8 shadow-[0_22px_70px_rgba(0,0,0,0.55)] backdrop-blur sm:p-10 lg:grid-cols-[1.15fr_0.85fr] lg:items-center">
+          <div>
+            <div className="text-xs font-semibold tracking-[0.25em] text-white/70">HELLO eCARD</div>
+            <h2 className="font-display mt-4 text-balance text-4xl font-semibold tracking-tight text-white sm:text-5xl">
+              Everything you need to share your profile.
+            </h2>
+            <p className="mt-4 max-w-prose text-sm leading-relaxed text-white/75 sm:text-base">
+              A modern digital identity that looks premium, works instantly, and helps you connect faster.
+            </p>
+          </div>
+
+          <div className="grid gap-3">
+            <div className="rounded-2xl border border-white/10 bg-black/35 p-4 shadow-soft">
+              <div className="text-sm font-semibold text-white">Fast</div>
+              <div className="mt-1 text-sm text-white/70">Share with a QR in seconds</div>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-black/35 p-4 shadow-soft">
+              <div className="text-sm font-semibold text-white">Beautiful</div>
+              <div className="mt-1 text-sm text-white/70">Clean yellow/black style</div>
+            </div>
+            <div className="rounded-2xl border border-white/10 bg-black/35 p-4 shadow-soft">
+              <div className="text-sm font-semibold text-white">Smart</div>
+              <div className="mt-1 text-sm text-white/70">Save, update, and grow</div>
+            </div>
+          </div>
+          </TiltCard>
+
+          <div
+            aria-hidden="true"
+            className="pointer-events-none absolute -right-10 -top-10 h-44 w-44 rounded-full border border-brand-accent/40 bg-brand-accent/10 blur-[1px]"
+          />
+          <div aria-hidden="true" className="pointer-events-none absolute -bottom-8 left-10 h-px w-2/3 bg-gradient-to-r from-transparent via-brand-accent/50 to-transparent" />
+        </div>
+      </Container>
+    </section>
+  );
+}
+
 function Badge({ children }: { children: React.ReactNode }) {
   return (
     <span className="inline-flex items-center rounded-full border border-brand-line bg-white/70 px-3 py-1 text-xs font-medium text-brand-muted backdrop-blur">
       {children}
     </span>
+  );
+}
+
+function TiltCard(
+  props: React.ComponentProps<typeof motion.div> & {
+    children: React.ReactNode;
+    tilt?: boolean;
+  }
+) {
+  const { children, className, tilt = true, style, onMouseMove, onMouseLeave, ...rest } = props;
+  const ref = useRef<HTMLDivElement | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const currentRef = useRef({ rx: 0, ry: 0, active: false });
+  const targetRef = useRef({ rx: 0, ry: 0 });
+
+  const handleMove = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      if (!tilt) {
+        onMouseMove?.(e);
+        return;
+      }
+
+      const el = ref.current;
+      if (!el) {
+        onMouseMove?.(e);
+        return;
+      }
+
+      const rect = el.getBoundingClientRect();
+      const px = (e.clientX - rect.left) / rect.width;
+      const py = (e.clientY - rect.top) / rect.height;
+
+      const mx = Math.max(0, Math.min(1, px));
+      const my = Math.max(0, Math.min(1, py));
+
+      const ry = (mx - 0.5) * 7;
+      const rx = -(my - 0.5) * 7;
+
+      el.style.setProperty('--mx', `${mx * 100}%`);
+      el.style.setProperty('--my', `${my * 100}%`);
+
+      targetRef.current.rx = rx;
+      targetRef.current.ry = ry;
+
+      if (!currentRef.current.active) {
+        currentRef.current.active = true;
+
+        const tick = () => {
+          const node = ref.current;
+          if (!node) {
+            currentRef.current.active = false;
+            rafRef.current = null;
+            return;
+          }
+
+          const cur = currentRef.current;
+          const tar = targetRef.current;
+
+          const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+          cur.rx = lerp(cur.rx, tar.rx, 0.12);
+          cur.ry = lerp(cur.ry, tar.ry, 0.12);
+
+          node.style.transform = `translate3d(0, -2px, 0) rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) scale(1.02)`;
+
+          const settled = Math.abs(cur.rx - tar.rx) + Math.abs(cur.ry - tar.ry) < 0.02;
+          if (settled && tar.rx === 0 && tar.ry === 0) {
+            node.style.transform = '';
+            currentRef.current.active = false;
+            rafRef.current = null;
+            return;
+          }
+
+          rafRef.current = requestAnimationFrame(tick);
+        };
+
+        rafRef.current = requestAnimationFrame(tick);
+      }
+
+      onMouseMove?.(e);
+    },
+    [onMouseMove, tilt]
+  );
+
+  const handleLeave = useCallback(
+    (e: React.MouseEvent<HTMLDivElement>) => {
+      const el = ref.current;
+      if (el) {
+        targetRef.current.rx = 0;
+        targetRef.current.ry = 0;
+      }
+      onMouseLeave?.(e);
+    },
+    [onMouseLeave]
+  );
+
+  return (
+    <div className="scene">
+      <motion.div
+        ref={ref}
+        onMouseMove={handleMove}
+        onMouseLeave={handleLeave}
+        style={style}
+        className={cn('tilt-card relative', className)}
+        {...rest}
+      >
+        <span aria-hidden="true" className="tilt-highlight" />
+        {children}
+      </motion.div>
+    </div>
   );
 }
 
@@ -139,6 +374,8 @@ function Nav() {
 }
 
 function Hero() {
+  const heroText = useMemo(() => 'Create your digital\nprofile in seconds.', []);
+
   return (
     <section className="relative overflow-hidden">
       <motion.div
@@ -155,10 +392,8 @@ function Hero() {
       <Container>
         <div className="relative py-16 sm:py-20 lg:py-24">
           <div className="text-center space-y-6">
-            <h1 className="text-balance text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">
-              Create your digital
-              <br />
-              profile in seconds.
+            <h1 className="font-display text-balance text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">
+              <TypewriterText text={heroText} />
             </h1>
           </div>
         </div>
@@ -188,12 +423,12 @@ function Steps() {
       <Container>
         <div className="grid gap-6 lg:grid-cols-3">
           {steps.map((s, idx) => (
-            <motion.div
+            <TiltCard
               key={s.title}
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.25, 1, 0.5, 1] }}
-              className="group rounded-3xl border border-brand-line bg-white p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift"
+              className="group rounded-3xl border border-brand-line bg-white/90 p-6 shadow-soft backdrop-blur transition-all duration-300 hover:shadow-lift"
             >
               <div className="flex items-center justify-between">
                 <div className="text-lg font-semibold text-brand-ink">{s.title}</div>
@@ -202,7 +437,7 @@ function Steps() {
                 </div>
               </div>
               <p className="mt-3 text-sm leading-relaxed text-brand-muted">{s.body}</p>
-            </motion.div>
+            </TiltCard>
           ))}
         </div>
       </Container>
@@ -372,63 +607,63 @@ function Steps() {
      },
    ];
 
-   return (
-     <section className="relative py-14 sm:py-16">
-       <div
-         aria-hidden="true"
-         className="pointer-events-none absolute inset-0"
-         style={{
-           background:
-             'radial-gradient(900px 420px at 50% 0%, rgba(250,204,21,0.12), rgba(250,204,21,0) 60%)',
-         }}
-       />
-       <Container>
-         <div className="relative flex flex-col gap-8">
-           <motion.h2
-             initial={{ opacity: 0, y: 20 }}
-             animate={{ opacity: 1, y: 0 }}
-             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-             className="text-center text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl"
-           >
-             Features
-           </motion.h2>
+  return (
+    <section className="relative py-14 sm:py-16">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(900px 420px at 50% 0%, rgba(250,204,21,0.12), rgba(250,204,21,0) 60%)',
+        }}
+      />
+      <Container>
+        <div className="relative flex flex-col gap-8">
+          <motion.h2
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+            className="font-display text-center text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl"
+          >
+            Features
+          </motion.h2>
 
-           <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
-             {items.map((item, idx) => (
-               <motion.div
-                 key={item.title}
-                 initial={{ opacity: 0, y: 18 }}
-                 animate={{ opacity: 1, y: 0 }}
-                 transition={{ duration: 0.8, delay: idx * 0.05, ease: [0.25, 1, 0.5, 1] }}
-                 className="rounded-[2rem] border border-black/40 bg-white/90 p-7 shadow-lift ring-1 ring-brand-accent/20"
-               >
-                 <div className="flex items-center gap-3">
-                   <div className="grid h-10 w-10 place-items-center rounded-full bg-brand-accent/10 text-brand-ink">
-                     {item.icon}
-                   </div>
-                   <div className="text-base font-semibold tracking-tight text-brand-ink">{item.title}</div>
-                 </div>
+          <div className="grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {items.map((item, idx) => (
+              <TiltCard
+                key={item.title}
+                initial={{ opacity: 0, y: 18 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.8, delay: idx * 0.05, ease: [0.25, 1, 0.5, 1] }}
+                className="rounded-[2rem] border border-black/40 bg-white/90 p-7 shadow-lift ring-1 ring-brand-accent/20"
+              >
+                <div className="flex items-center gap-3">
+                  <div className="grid h-10 w-10 place-items-center rounded-full bg-brand-accent/10 text-brand-ink">
+                    {item.icon}
+                  </div>
+                  <div className="text-base font-semibold tracking-tight text-brand-ink">{item.title}</div>
+                </div>
 
-                 <div className="mt-4 h-px w-full bg-black/10" />
+                <div className="mt-4 h-px w-full bg-black/10" />
 
-                 <p className="mt-4 text-sm leading-relaxed text-brand-muted">{item.body}</p>
-                 <p className="mt-4 text-sm italic leading-relaxed text-brand-muted">{item.note}</p>
+                <p className="mt-4 text-sm leading-relaxed text-brand-muted">{item.body}</p>
+                <p className="mt-4 text-sm italic leading-relaxed text-brand-muted">{item.note}</p>
 
-                 <button
-                   type="button"
-                   className="pressable mt-6 inline-flex items-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white"
-                 >
-                   See more
-                   <span aria-hidden="true">→</span>
-                 </button>
-               </motion.div>
-             ))}
-           </div>
-         </div>
-       </Container>
-     </section>
-   );
- }
+                <button
+                  type="button"
+                  className="pressable mt-6 inline-flex items-center gap-2 rounded-full bg-black px-5 py-2.5 text-sm font-semibold text-white"
+                >
+                  See more
+                  <span aria-hidden="true">→</span>
+                </button>
+              </TiltCard>
+            ))}
+          </div>
+        </div>
+      </Container>
+    </section>
+  );
+}
 
 function Plans() {
   const plans = [
@@ -442,23 +677,24 @@ function Plans() {
     <section id="plans" className="py-14 sm:py-16">
       <Container>
         <div className="flex flex-col gap-8">
-          <motion.h2 
+          <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-            className="text-center text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl"
+            className="font-display text-center text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl"
           >
             Plans
           </motion.h2>
 
           <div className="flex flex-col gap-6">
             {plans.map((p, idx) => (
-              <motion.div
+              <TiltCard
                 key={p.name}
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.25, 1, 0.5, 1] }}
                 className="pressable btn-shine group relative overflow-hidden rounded-[2.25rem] bg-gradient-to-b from-brand-ink to-black px-4 sm:px-6 py-6 sm:py-7 text-white shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
+                tilt={false}
               >
                 <div
                   aria-hidden="true"
@@ -479,7 +715,7 @@ function Plans() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </TiltCard>
             ))}
           </div>
         </div>
@@ -529,26 +765,26 @@ function Footer() {
   ];
 
   return (
-    <footer id="support" className="border-t border-brand-line py-12">
+    <footer id="support" className="relative overflow-hidden bg-black py-12 text-white">
       <Container>
-        <div className="grid gap-10 md:grid-cols-[220px_1fr]">
+        <div className="grid min-w-0 gap-10 md:grid-cols-[220px_1fr]">
           <div className="flex items-start gap-3">
             <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-ink text-white">H</div>
             <div>
-              <div className="text-base font-semibold tracking-tight text-brand-ink">Hello eCard</div>
-              <div className="mt-1 text-sm text-brand-muted">Create your digital profile in seconds.</div>
+              <div className="text-base font-semibold tracking-tight text-white">Hello eCard</div>
+              <div className="mt-1 text-sm text-white/70">Create your digital profile in seconds.</div>
             </div>
           </div>
 
-          <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-5">
+          <div className="grid min-w-0 gap-8 sm:grid-cols-2 lg:grid-cols-4">
             {columns.map((col) => (
-              <div key={col.title}>
-                <div className="text-sm font-semibold text-brand-ink">{col.title}</div>
+              <div key={col.title} className="min-w-0">
+                <div className="text-sm font-semibold text-white">{col.title}</div>
                 <div className="mt-4 space-y-3 text-sm">
                   {col.items.map((i) => (
                     <a
                       key={i.label}
-                      className="block text-brand-muted transition-colors hover:text-brand-ink"
+                      className="block text-white/70 transition-colors hover:text-white"
                       href={i.href ?? '#'}
                       target={i.href?.startsWith('http') ? '_blank' : undefined}
                       rel={i.href?.startsWith('http') ? 'noopener noreferrer' : undefined}
@@ -562,10 +798,10 @@ function Footer() {
           </div>
         </div>
 
-        <div className="mt-12 flex flex-col gap-4 border-t border-brand-line pt-6 sm:flex-row sm:items-center sm:justify-between">
-          <div className="text-sm text-brand-muted">© {new Date().getFullYear()} Hello eCard. All rights reserved.</div>
+        <div className="mt-12 flex flex-col gap-4 border-t border-white/10 pt-6 sm:flex-row sm:items-center sm:justify-between">
+          <div className="text-sm text-white/60">© {new Date().getFullYear()} Hello eCard. All rights reserved.</div>
           <button
-            className="pressable inline-flex h-11 w-11 items-center justify-center rounded-full border border-brand-line bg-white text-brand-ink shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+            className="pressable inline-flex h-11 w-11 items-center justify-center rounded-full border border-white/10 bg-white/5 text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/10 hover:shadow-lift"
             onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
             aria-label="Scroll to top"
             type="button"
@@ -585,6 +821,7 @@ export default function Page() {
         <Nav />
         <Hero />
         <Steps />
+        <SectionDivider />
         <FeaturesSection />
         <Plans />
         <Footer />

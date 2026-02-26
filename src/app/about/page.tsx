@@ -1,12 +1,116 @@
 'use client';
 
-import { useState } from 'react';
+import { useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MotionConfig, motion } from 'framer-motion';
 
 function Container({ children }: { children: React.ReactNode }) {
   return <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">{children}</div>;
+}
+
+function TiltCard(
+  props: React.ComponentProps<typeof motion.div> & {
+    tilt?: boolean;
+  }
+) {
+  const { tilt = true, className, onMouseMove, onMouseLeave, style, ...rest } = props;
+  const ref = useRef<HTMLDivElement | null>(null);
+  const rafRef = useRef<number | null>(null);
+  const currentRef = useRef({ rx: 0, ry: 0, active: false });
+  const targetRef = useRef({ rx: 0, ry: 0 });
+
+  return (
+    <motion.div
+      {...rest}
+      className={tilt ? `tilt-card ${className ?? ''}` : className}
+      style={{
+        ...style,
+        ...(tilt
+          ? ({
+              ['--mx' as unknown as string]: '50%',
+              ['--my' as unknown as string]: '45%',
+            } as React.CSSProperties)
+          : null),
+      }}
+      onMouseMove={(e) => {
+        if (tilt) {
+          const el = ref.current;
+          if (el) {
+            const rect = el.getBoundingClientRect();
+            const px = (e.clientX - rect.left) / rect.width;
+            const py = (e.clientY - rect.top) / rect.height;
+
+            const mx = Math.max(0, Math.min(1, px));
+            const my = Math.max(0, Math.min(1, py));
+
+            const ry = (mx - 0.5) * 7;
+            const rx = -(my - 0.5) * 7;
+
+            targetRef.current.rx = rx;
+            targetRef.current.ry = ry;
+
+            if (!currentRef.current.active) {
+              currentRef.current.active = true;
+
+              const tick = () => {
+                const node = ref.current;
+                if (!node) {
+                  currentRef.current.active = false;
+                  rafRef.current = null;
+                  return;
+                }
+
+                const cur = currentRef.current;
+                const tar = targetRef.current;
+
+                const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+                cur.rx = lerp(cur.rx, tar.rx, 0.12);
+                cur.ry = lerp(cur.ry, tar.ry, 0.12);
+
+                node.style.transform = `translate3d(0, -2px, 0) rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) scale(1.02)`;
+
+                const settled = Math.abs(cur.rx - tar.rx) + Math.abs(cur.ry - tar.ry) < 0.02;
+                if (settled && tar.rx === 0 && tar.ry === 0) {
+                  node.style.transform = '';
+                  currentRef.current.active = false;
+                  rafRef.current = null;
+                  return;
+                }
+
+                rafRef.current = requestAnimationFrame(tick);
+              };
+
+              rafRef.current = requestAnimationFrame(tick);
+            }
+          }
+
+          const target = e.currentTarget;
+          const rect = target.getBoundingClientRect();
+          const x = ((e.clientX - rect.left) / rect.width) * 100;
+          const y = ((e.clientY - rect.top) / rect.height) * 100;
+          target.style.setProperty('--mx', `${x}%`);
+          target.style.setProperty('--my', `${y}%`);
+        }
+        onMouseMove?.(e);
+      }}
+      onMouseLeave={(e) => {
+        if (tilt) {
+          const el = ref.current;
+          if (el) {
+            targetRef.current.rx = 0;
+            targetRef.current.ry = 0;
+          }
+
+          const target = e.currentTarget;
+          target.style.setProperty('--mx', '50%');
+          target.style.setProperty('--my', '45%');
+        }
+        onMouseLeave?.(e);
+      }}
+      ref={ref}
+    />
+  );
 }
 
 function DarkButton({ children }: { children: React.ReactNode }) {
@@ -25,7 +129,7 @@ export default function AboutPage() {
 
   return (
     <MotionConfig reducedMotion="user">
-      <div className="min-h-screen bg-white">
+      <div className="min-h-screen bg-transparent">
         <div className="sticky top-0 z-50 border-b border-brand-line bg-white/90 backdrop-blur">
           <Container>
             <div className="flex h-16 items-center justify-between">
@@ -93,7 +197,7 @@ export default function AboutPage() {
         <main>
           <section className="py-10 sm:py-12">
             <Container>
-              <motion.div
+              <TiltCard
                 initial={{ opacity: 0, x: -18 }}
                 animate={{ opacity: 1, x: 0 }}
                 transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
@@ -101,7 +205,7 @@ export default function AboutPage() {
               >
                 <div className="grid items-stretch gap-0 lg:grid-cols-2">
                   <div className="px-8 py-10 sm:px-10 sm:py-12">
-                    <div className="text-5xl font-medium tracking-tight text-brand-ink sm:text-6xl">
+                    <div className="font-display text-5xl font-medium tracking-tight text-brand-ink sm:text-6xl">
                       <div className="text-brand-ink/70">More</div>
                       <div>About Us</div>
                     </div>
@@ -127,13 +231,13 @@ export default function AboutPage() {
                     <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/0 to-black/15" />
                   </motion.div>
                 </div>
-              </motion.div>
+              </TiltCard>
 
-              <motion.div
+              <TiltCard
                 initial={{ opacity: 0, y: 12 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-                className="mt-6 rounded-[1.75rem] border border-black/10 bg-white p-7 shadow-soft sm:mt-8 sm:p-8"
+                className="mt-6 rounded-[1.75rem] border border-black/10 bg-white/85 p-7 shadow-soft backdrop-blur sm:mt-8 sm:p-8"
               >
                 <div className="text-2xl font-semibold tracking-tight text-brand-ink">Who we are?</div>
                 <p className="mt-4 text-sm leading-relaxed text-brand-muted">
@@ -142,22 +246,22 @@ export default function AboutPage() {
                 <p className="mt-4 text-sm leading-relaxed text-brand-muted">
                   Whether you&apos;re a freelancer, entrepreneur, or corporate professional, Hello eCard helps you stand out with a modern, eco-friendly alternative to traditional business cards — enhancing visibility, boosting engagement, and making meaningful connections easier than ever.
                 </p>
-              </motion.div>
+              </TiltCard>
 
-              <motion.div
+              <TiltCard
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
-                className="mt-8 overflow-hidden rounded-[1.75rem] border border-brand-accent/20 bg-brand-accent/5 shadow-soft"
+                className="mt-8 overflow-hidden rounded-[1.75rem] border border-brand-accent/20 bg-brand-accent/10 shadow-soft backdrop-blur"
               >
                 <div className="bg-brand-accent px-4 py-8 text-brand-ink sm:px-6 sm:py-10">
                   <div className="text-balance text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">
                     We are <span className="text-brand-ink/90">innovation</span>
                   </div>
                 </div>
-              </motion.div>
+              </TiltCard>
 
-              <motion.div
+              <TiltCard
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
@@ -178,13 +282,13 @@ export default function AboutPage() {
                     </p>
                   </div>
                 </div>
-              </motion.div>
+              </TiltCard>
 
-              <motion.div
+              <TiltCard
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
-                className="relative mt-6 overflow-hidden rounded-[1.75rem] border border-black/10 bg-white shadow-soft"
+                className="relative mt-6 overflow-hidden rounded-[1.75rem] border border-black/10 bg-white/85 shadow-soft backdrop-blur"
               >
                 <div className="grid gap-10 p-8 sm:p-10 lg:grid-cols-[1fr_1.25fr] lg:items-stretch">
                   <div className="flex flex-col justify-between">
@@ -224,9 +328,9 @@ export default function AboutPage() {
                   </div>
                 </div>
 
-                              </motion.div>
+              </TiltCard>
 
-              <motion.div
+              <TiltCard
                 initial={{ opacity: 0, y: 25 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
@@ -234,7 +338,7 @@ export default function AboutPage() {
               >
                 <div className="grid items-center gap-8 px-8 py-10 sm:px-10 sm:py-12 lg:grid-cols-[1fr_auto]">
                   <div>
-                    <div className="text-center text-3xl font-medium tracking-tight sm:text-4xl lg:text-left lg:text-5xl">
+                    <div className="font-display text-center text-3xl font-medium tracking-tight sm:text-4xl lg:text-left lg:text-5xl">
                       Let’s Build Your Professional
                       <br />
                       Profile Together
@@ -257,13 +361,13 @@ export default function AboutPage() {
                     </div>
                   </div>
                 </div>
-              </motion.div>
+              </TiltCard>
 
               <motion.footer
                 initial={{ opacity: 0, y: 20 }}
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
-                className="relative mt-10 rounded-[1.75rem] border border-black/10 bg-white p-8 shadow-soft sm:p-10"
+                className="relative mt-10 rounded-[1.75rem] border border-black/10 bg-white/85 p-8 shadow-soft backdrop-blur sm:p-10"
               >
                 <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-5">
                   <div>
