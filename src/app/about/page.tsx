@@ -1,6 +1,6 @@
 'use client';
 
-import { useRef, useState } from 'react';
+import { useCallback, useRef, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
 import { MotionConfig, motion } from 'framer-motion';
@@ -14,102 +14,113 @@ function TiltCard(
     tilt?: boolean;
   }
 ) {
-  const { tilt = true, className, onMouseMove, onMouseLeave, style, ...rest } = props;
+  const { tilt = true, className, onMouseMove, onMouseLeave, style, children, ...rest } = props;
   const ref = useRef<HTMLDivElement | null>(null);
   const rafRef = useRef<number | null>(null);
   const currentRef = useRef({ rx: 0, ry: 0, active: false });
   const targetRef = useRef({ rx: 0, ry: 0 });
 
+  const handleEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (el) {
+      el.setAttribute('data-hovered', 'true');
+      el.style.setProperty('--mx', '50%');
+      el.style.setProperty('--my', '45%');
+    }
+  }, []);
+
   return (
-    <motion.div
-      {...rest}
-      className={tilt ? `tilt-card ${className ?? ''}` : className}
-      style={{
-        ...style,
-        ...(tilt
-          ? ({
-              ['--mx' as unknown as string]: '50%',
-              ['--my' as unknown as string]: '45%',
-            } as React.CSSProperties)
-          : null),
-      }}
-      onMouseMove={(e) => {
-        if (tilt) {
-          const el = ref.current;
-          if (el) {
-            const rect = el.getBoundingClientRect();
-            const px = (e.clientX - rect.left) / rect.width;
-            const py = (e.clientY - rect.top) / rect.height;
+    <div className="scene group" onMouseEnter={handleEnter} onMouseLeave={(e) => {
+      if (tilt) {
+        const el = ref.current;
+        if (el) {
+          el.removeAttribute('data-hovered');
+          targetRef.current.rx = 0;
+          targetRef.current.ry = 0;
+          el.style.setProperty('--mx', '50%');
+          el.style.setProperty('--my', '45%');
+        }
+      }
+      onMouseLeave?.(e);
+    }}>
+      <motion.div
+        {...rest}
+        className={tilt ? `tilt-card ${className ?? ''}` : className}
+        style={{
+          ...style,
+          ...(tilt
+            ? ({
+                ['--mx' as unknown as string]: '50%',
+                ['--my' as unknown as string]: '45%',
+              } as React.CSSProperties)
+            : null),
+        }}
+        onMouseMove={(e) => {
+          if (tilt) {
+            const el = ref.current;
+            if (el) {
+              const rect = el.getBoundingClientRect();
+              const px = (e.clientX - rect.left) / rect.width;
+              const py = (e.clientY - rect.top) / rect.height;
 
-            const mx = Math.max(0, Math.min(1, px));
-            const my = Math.max(0, Math.min(1, py));
+              const mx = Math.max(0, Math.min(1, px));
+              const my = Math.max(0, Math.min(1, py));
 
-            const ry = (mx - 0.5) * 7;
-            const rx = -(my - 0.5) * 7;
+              const ry = (mx - 0.5) * 7;
+              const rx = -(my - 0.5) * 7;
 
-            targetRef.current.rx = rx;
-            targetRef.current.ry = ry;
+              targetRef.current.rx = rx;
+              targetRef.current.ry = ry;
 
-            if (!currentRef.current.active) {
-              currentRef.current.active = true;
+              if (!currentRef.current.active) {
+                currentRef.current.active = true;
 
-              const tick = () => {
-                const node = ref.current;
-                if (!node) {
-                  currentRef.current.active = false;
-                  rafRef.current = null;
-                  return;
-                }
+                const tick = () => {
+                  const node = ref.current;
+                  if (!node) {
+                    currentRef.current.active = false;
+                    rafRef.current = null;
+                    return;
+                  }
 
-                const cur = currentRef.current;
-                const tar = targetRef.current;
+                  const cur = currentRef.current;
+                  const tar = targetRef.current;
 
-                const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
-                cur.rx = lerp(cur.rx, tar.rx, 0.12);
-                cur.ry = lerp(cur.ry, tar.ry, 0.12);
+                  const lerp = (a: number, b: number, t: number) => a + (b - a) * t;
+                  cur.rx = lerp(cur.rx, tar.rx, 0.12);
+                  cur.ry = lerp(cur.ry, tar.ry, 0.12);
 
-                node.style.transform = `translate3d(0, -2px, 0) rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) scale(var(--tiltScale))`;
+                  node.style.transform = `translate3d(0, 0, 0) rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) scale(var(--tiltScale))`;
 
-                const settled = Math.abs(cur.rx - tar.rx) + Math.abs(cur.ry - tar.ry) < 0.02;
-                if (settled && tar.rx === 0 && tar.ry === 0) {
-                  node.style.transform = 'translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(var(--tiltScale))';
-                  currentRef.current.active = false;
-                  rafRef.current = null;
-                  return;
-                }
+                  const settled = Math.abs(cur.rx - tar.rx) + Math.abs(cur.ry - tar.ry) < 0.02;
+                  if (settled && tar.rx === 0 && tar.ry === 0) {
+                    node.style.transform = 'translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(var(--tiltScale))';
+                    currentRef.current.active = false;
+                    rafRef.current = null;
+                    return;
+                  }
+
+                  rafRef.current = requestAnimationFrame(tick);
+                };
 
                 rafRef.current = requestAnimationFrame(tick);
-              };
-
-              rafRef.current = requestAnimationFrame(tick);
+              }
             }
-          }
 
-          const target = e.currentTarget;
-          const rect = target.getBoundingClientRect();
-          const x = ((e.clientX - rect.left) / rect.width) * 100;
-          const y = ((e.clientY - rect.top) / rect.height) * 100;
-          target.style.setProperty('--mx', `${x}%`);
-          target.style.setProperty('--my', `${y}%`);
-        }
-        onMouseMove?.(e);
-      }}
-      onMouseLeave={(e) => {
-        if (tilt) {
-          const el = ref.current;
-          if (el) {
-            targetRef.current.rx = 0;
-            targetRef.current.ry = 0;
+            const target = e.currentTarget as HTMLDivElement;
+            const rect = target.getBoundingClientRect();
+            const x = ((e.clientX - rect.left) / rect.width) * 100;
+            const y = ((e.clientY - rect.top) / rect.height) * 100;
+            target.style.setProperty('--mx', `${x}%`);
+            target.style.setProperty('--my', `${y}%`);
           }
-
-          const target = e.currentTarget;
-          target.style.setProperty('--mx', '50%');
-          target.style.setProperty('--my', '45%');
-        }
-        onMouseLeave?.(e);
-      }}
-      ref={ref}
-    />
+          onMouseMove?.(e);
+        }}
+        ref={ref}
+      >
+        {children}
+      </motion.div>
+    </div>
   );
 }
 

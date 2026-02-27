@@ -37,6 +37,20 @@ body {
   transform-style: preserve-3d;
 }
 
+/* Mantener hover estable: si el usuario está sobre la escena, aplica el hover al hijo tilt-card */
+.scene:hover .tilt-card {
+  --tiltScale: 1.035;
+  box-shadow: 0 18px 48px rgba(250, 204, 21, 0.28), 0 10px 26px rgba(0, 0, 0, 0.10);
+  filter: saturate(1.02);
+}
+
+/* Estado controlado por JS para estabilidad absoluta del hover */
+.tilt-card[data-hovered="true"] {
+  --tiltScale: 1.035;
+  box-shadow: 0 18px 48px rgba(250, 204, 21, 0.28), 0 10px 26px rgba(0, 0, 0, 0.10);
+  filter: saturate(1.02);
+}
+
 .tilt-card {
   transform-style: preserve-3d;
   will-change: transform;
@@ -44,7 +58,8 @@ body {
   backface-visibility: hidden;
   -webkit-font-smoothing: antialiased;
   --tiltScale: 1;
-  transition: box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1), filter 260ms cubic-bezier(0.22, 1, 0.36, 1);
+  transform: translate3d(0, 0, 0) rotateX(0deg) rotateY(0deg) scale(var(--tiltScale));
+  transition: transform 260ms cubic-bezier(0.22, 1, 0.36, 1), box-shadow 260ms cubic-bezier(0.22, 1, 0.36, 1), filter 260ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .tilt-card:hover {
@@ -61,6 +76,14 @@ body {
   background: radial-gradient(500px 280px at var(--mx, 50%) var(--my, 50%), rgba(250, 204, 21, 0.22), rgba(250, 204, 21, 0) 55%);
   opacity: 0;
   transition: opacity 260ms ease;
+}
+
+.scene:hover .tilt-card .tilt-highlight {
+  opacity: 1;
+}
+
+.tilt-card[data-hovered="true"] .tilt-highlight {
+  opacity: 1;
 }
 
 .tilt-card:hover .tilt-highlight {

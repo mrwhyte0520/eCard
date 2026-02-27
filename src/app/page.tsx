@@ -159,6 +159,15 @@ function TiltCard(
   const currentRef = useRef({ rx: 0, ry: 0, active: false });
   const targetRef = useRef({ rx: 0, ry: 0 });
 
+  const handleEnter = useCallback((e: React.MouseEvent<HTMLDivElement>) => {
+    const el = ref.current;
+    if (el) {
+      el.setAttribute('data-hovered', 'true');
+      el.style.setProperty('--mx', '50%');
+      el.style.setProperty('--my', '45%');
+    }
+  }, []);
+
   const handleMove = useCallback(
     (e: React.MouseEvent<HTMLDivElement>) => {
       if (!tilt) {
@@ -206,7 +215,7 @@ function TiltCard(
           cur.rx = lerp(cur.rx, tar.rx, 0.12);
           cur.ry = lerp(cur.ry, tar.ry, 0.12);
 
-          node.style.transform = `translate3d(0, -2px, 0) rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) scale(var(--tiltScale))`;
+          node.style.transform = `translate3d(0, 0, 0) rotateX(${cur.rx}deg) rotateY(${cur.ry}deg) scale(var(--tiltScale))`;
 
           const settled = Math.abs(cur.rx - tar.rx) + Math.abs(cur.ry - tar.ry) < 0.02;
           if (settled && tar.rx === 0 && tar.ry === 0) {
@@ -231,6 +240,7 @@ function TiltCard(
     (e: React.MouseEvent<HTMLDivElement>) => {
       const el = ref.current;
       if (el) {
+        el.removeAttribute('data-hovered');
         targetRef.current.rx = 0;
         targetRef.current.ry = 0;
       }
@@ -240,11 +250,10 @@ function TiltCard(
   );
 
   return (
-    <div className="scene">
+    <div className="scene" onMouseEnter={handleEnter} onMouseLeave={handleLeave}>
       <motion.div
         ref={ref}
         onMouseMove={handleMove}
-        onMouseLeave={handleLeave}
         style={style}
         className={cn('tilt-card relative', className)}
         {...rest}
@@ -442,7 +451,7 @@ function Steps() {
               initial={{ opacity: 0, y: 25 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: idx * 0.12, ease: [0.25, 1, 0.5, 1] }}
-              className="group rounded-3xl border border-brand-line bg-white/90 p-6 shadow-soft backdrop-blur transition-all duration-300 hover:shadow-lift"
+              className="group rounded-3xl border border-brand-line bg-white/90 p-6 shadow-soft backdrop-blur transition-all duration-300"
             >
               <div className="flex items-center justify-between">
                 <div className="text-lg font-semibold text-brand-ink">{s.title}</div>
@@ -680,13 +689,6 @@ function Steps() {
 }
 
 function Plans() {
-  const plans = [
-    { name: 'Free', price: 'USD 0.00' },
-    { name: 'PRO', price: 'USD 18.00' },
-    { name: 'PRO+', price: 'USD 36.00' },
-    { name: 'Business', price: 'USD 49.99' },
-  ];
-
   return (
     <section id="plans" className="py-14 sm:py-16">
       <Container>
@@ -700,37 +702,102 @@ function Plans() {
             Plans
           </motion.h2>
 
-          <div className="flex flex-col gap-6">
-            {plans.map((p, idx) => (
-              <TiltCard
-                key={p.name}
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.8, delay: idx * 0.1, ease: [0.25, 1, 0.5, 1] }}
-                className="pressable btn-shine group relative overflow-hidden rounded-[2.25rem] bg-gradient-to-b from-brand-ink to-black px-4 sm:px-6 py-6 sm:py-7 text-white shadow-soft transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-lift"
-                tilt={false}
-              >
-                <div
-                  aria-hidden="true"
-                  className="absolute inset-y-0 left-2 sm:left-6 my-auto h-8 w-[2px] sm:h-12 sm:w-[4px] rounded-full bg-gradient-to-b from-brand-accent/60 to-brand-accent/40 transition-all duration-300 ease-out group-hover:h-10 sm:group-hover:h-14"
-                />
-                <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-white/0 via-white/0 to-white/5 opacity-70 transition-opacity duration-300 group-hover:opacity-100" />
-
-                <div className="flex flex-col gap-6 sm:flex-row sm:items-center sm:justify-between">
-                  <div className="pl-4 sm:pl-7">
-                    <div className="text-xl font-semibold tracking-tight">{p.name}</div>
-                    <div className="mt-1 text-sm text-white/70">Membership plan</div>
+          <div className="mx-auto grid w-full max-w-4xl gap-6 md:grid-cols-2">
+            <TiltCard
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+              className="rounded-[2rem] border border-black/10 bg-white/90 p-6 shadow-soft backdrop-blur"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-accent/10 text-brand-ink ring-1 ring-black/5">
+                    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
+                      <path
+                        d="M7 10V8a5 5 0 0 1 10 0v2"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                      <path
+                        d="M6 10h12v10H6V10Z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
                   </div>
-
-                  <div className="flex items-center gap-4">
-                    <div className="text-right">
-                      <div className="text-2xl font-bold">{p.price}</div>
-                      <div className="text-sm text-white/70">per month</div>
-                    </div>
+                  <div>
+                    <div className="text-xl font-semibold tracking-tight text-brand-ink">Free Plan</div>
                   </div>
                 </div>
-              </TiltCard>
-            ))}
+
+                <span className="inline-flex items-center rounded-full border border-black/10 bg-brand-accent/10 px-3 py-1 text-xs font-semibold text-brand-ink">
+                  Start
+                </span>
+              </div>
+
+              <p className="mt-4 text-sm leading-relaxed text-brand-muted">
+                1 item per module. Editing is not allowed. You can delete it, but you won&apos;t be able to create another item in that module.
+              </p>
+
+              <button
+                type="button"
+                className="pressable mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-ink px-5 py-3 text-sm font-semibold text-brand-accent shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+              >
+                <span aria-hidden="true">→</span>
+                Continue with Free
+              </button>
+            </TiltCard>
+
+            <TiltCard
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.8, delay: 0.08, ease: [0.25, 1, 0.5, 1] }}
+              className="rounded-[2rem] border border-black/10 bg-white/90 p-6 shadow-soft backdrop-blur"
+            >
+              <div className="flex items-start justify-between gap-4">
+                <div className="flex items-center gap-3">
+                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-accent/10 text-brand-ink ring-1 ring-black/5">
+                    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
+                      <path
+                        d="M12 2l3 6 6 .9-4.4 4.3 1 6.3L12 17.8 6.4 19.5l1-6.3L3 8.9 9 8l3-6Z"
+                        stroke="currentColor"
+                        strokeWidth="2"
+                        strokeLinejoin="round"
+                      />
+                    </svg>
+                  </div>
+                  <div>
+                    <div className="text-xl font-semibold tracking-tight text-brand-ink">Premium Plan</div>
+                  </div>
+                </div>
+
+                <span className="inline-flex items-center rounded-full border border-black/10 bg-brand-accent/15 px-3 py-1 text-xs font-semibold text-brand-ink">
+                  Best value
+                </span>
+              </div>
+
+              <p className="mt-4 text-sm leading-relaxed text-brand-muted">Unlimited access. Annual billing only.</p>
+              <div className="mt-3 text-sm font-medium text-brand-ink">Choose your period:</div>
+
+              <div className="mt-5 grid gap-3">
+                <button
+                  type="button"
+                  className="pressable inline-flex w-full items-center justify-center rounded-full bg-brand-accent px-5 py-3 text-sm font-semibold text-black shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+                >
+                  39.96 USD / 1 year
+                </button>
+                <button
+                  type="button"
+                  className="pressable inline-flex w-full items-center justify-center rounded-full bg-brand-accent px-5 py-3 text-sm font-semibold text-black shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+                >
+                  59.76 USD / 2 years
+                </button>
+              </div>
+            </TiltCard>
           </div>
         </div>
       </Container>
@@ -750,30 +817,11 @@ function Footer() {
       ],
     },
     {
-      title: 'Demo Profile',
-      items: [
-        { label: 'Doctor', href: '#' },
-        { label: 'Business', href: '#' },
-        { label: 'Personal', href: '#' },
-        { label: 'Lawyer', href: '#' },
-        { label: 'Driver', href: '#' },
-        { label: 'Gym', href: '#' },
-      ],
-    },
-    {
       title: 'Follow Us',
       items: [
         { label: 'Facebook', href: 'https://facebook.com' },
         { label: 'Instagram', href: 'https://instagram.com' },
         { label: 'X (Twitter)', href: 'https://twitter.com' },
-      ],
-    },
-    {
-      title: 'Contact Us',
-      items: [
-        { label: 'Write Us', href: 'mailto:hello@herlloecard.com' },
-        { label: 'Support Chat', href: '#' },
-        { label: 'Support WhatsApp', href: 'https://wa.me/1234567890' },
       ],
     },
   ];
