@@ -165,7 +165,7 @@ body {
   margin-left: 0.08ch;
   border-bottom: 0.12em solid transparent;
   transform: translateY(0.08em);
-  animation: caretBlink 1s steps(1, end) infinite;
+  animation: caretBlink 1.35s ease-in-out infinite;
 }
 
 .pressable {

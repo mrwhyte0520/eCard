@@ -123,6 +123,7 @@ function TypewriterText({
 }) {
   const reducedMotion = usePrefersReducedMotion();
   const [shown, setShown] = useState(reducedMotion ? text : '');
+  const lastTextRef = useRef(text);
 
   useEffect(() => {
     if (reducedMotion) {
@@ -130,20 +131,48 @@ function TypewriterText({
       return;
     }
 
-    let idx = 0;
-    setShown('');
-    const timeout = window.setTimeout(() => {
-      const timer = window.setInterval(() => {
-        idx += 1;
-        setShown(text.slice(0, idx));
-        if (idx >= text.length) {
-          window.clearInterval(timer);
-        }
-      }, speedMs);
-    }, startDelayMs);
+    if (lastTextRef.current !== text) {
+      lastTextRef.current = text;
+      setShown('');
+    }
+
+    let raf = 0;
+    let start = 0;
+    let prevCount = -1;
+    let canceled = false;
+
+    const tick = (now: number) => {
+      if (canceled) return;
+
+      if (!start) start = now;
+      const elapsed = now - start;
+
+      if (elapsed < startDelayMs) {
+        raf = window.requestAnimationFrame(tick);
+        return;
+      }
+
+      const msPerChar = Math.max(12, speedMs);
+      const typingElapsed = elapsed - startDelayMs;
+      const count = Math.min(text.length, Math.floor(typingElapsed / msPerChar));
+
+      if (count !== prevCount) {
+        prevCount = count;
+        setShown(text.slice(0, count));
+      }
+
+      if (count < text.length) {
+        raf = window.requestAnimationFrame(tick);
+      } else {
+        setShown(text);
+      }
+    };
+
+    raf = window.requestAnimationFrame(tick);
 
     return () => {
-      window.clearTimeout(timeout);
+      canceled = true;
+      window.cancelAnimationFrame(raf);
     };
   }, [reducedMotion, speedMs, startDelayMs, text]);
 
@@ -495,7 +524,7 @@ function Hero() {
           <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
             <div className="space-y-6 text-center lg:text-left">
               <div className="text-base font-medium text-brand-muted sm:text-lg">Forget about paper cards.</div>
-              <h1 className="font-display text-balance text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl lg:text-7xl">
+              <h1 className="font-display min-h-[2.4em] text-5xl font-semibold tracking-tight text-brand-ink sm:min-h-[2.2em] sm:text-6xl lg:min-h-[2.05em] lg:text-7xl">
                 <TypewriterText text={heroText} />
               </h1>
               <button
