@@ -9,6 +9,84 @@ function cn(...classes: Array<string | false | null | undefined>) {
   return classes.filter(Boolean).join(' ');
 }
 
+function PhoneMockup() {
+  return (
+    <div className="relative mx-auto w-full max-w-[360px]">
+      <div aria-hidden="true" className="pointer-events-none absolute -inset-8 rounded-[3rem] bg-black/10 blur-2xl" />
+      <div className="relative overflow-hidden rounded-[2.5rem] border border-white/10 bg-black shadow-[0_26px_70px_rgba(0,0,0,0.55)]">
+        <div
+          aria-hidden="true"
+          className="absolute inset-0 opacity-80"
+          style={{
+            background:
+              'radial-gradient(500px 260px at 30% 20%, rgba(250,204,21,0.20), rgba(250,204,21,0) 60%), radial-gradient(600px 320px at 80% 80%, rgba(255,255,255,0.10), rgba(255,255,255,0) 62%)',
+          }}
+        />
+
+        <div className="relative px-6 pb-7 pt-6">
+          <div className="flex items-center justify-between">
+            <button
+              type="button"
+              className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/5 text-white/80"
+              aria-label="Back"
+            >
+              ←
+            </button>
+            <button
+              type="button"
+              className="grid h-9 w-9 place-items-center rounded-full border border-white/10 bg-white/5 text-white/80"
+              aria-label="More"
+            >
+              ⋯
+            </button>
+          </div>
+
+          <div className="mt-6 flex flex-col items-center text-center">
+            <div className="relative h-24 w-24 overflow-hidden rounded-full ring-2 ring-brand-accent/70">
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-accent/50 via-brand-accent/10 to-white/10" />
+              <div className="absolute inset-1 overflow-hidden rounded-full bg-black/60">
+                <Image
+                  src="/a.png"
+                  alt=""
+                  fill
+                  className="object-cover [object-position:50%_18%] scale-[1.24]"
+                  priority={false}
+                />
+              </div>
+            </div>
+            <div className="mt-4 text-sm font-semibold tracking-[0.22em] text-white/80">MR. STEVEN DOE</div>
+            <div className="mt-1 text-xs font-medium text-white/55">CEO</div>
+          </div>
+
+          <div className="mt-6 grid gap-3">
+            {[
+              { label: 'Website', icon: '⌂' },
+              { label: 'Instagram', icon: '◎' },
+              { label: 'Facebook', icon: 'f' },
+              { label: 'Text me', icon: '✉' },
+            ].map((i) => (
+              <button
+                key={i.label}
+                type="button"
+                className="pressable inline-flex h-11 w-full items-center justify-center gap-2 rounded-full border border-white/15 bg-black/40 px-4 text-sm font-semibold text-white shadow-[0_10px_26px_rgba(0,0,0,0.45)] transition-colors duration-300 hover:border-brand-accent/40 hover:bg-black/55"
+              >
+                <span aria-hidden="true" className="text-brand-accent">{i.icon}</span>
+                {i.label}
+              </button>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <div aria-hidden="true" className="pointer-events-none absolute right-0 top-1/2 hidden -translate-y-1/2 gap-2 md:grid">
+        <span className="h-2 w-2 rounded-full bg-brand-accent" />
+        <span className="h-2 w-2 rounded-full bg-brand-accent/60" />
+        <span className="h-2 w-2 rounded-full bg-brand-accent/30" />
+      </div>
+    </div>
+  );
+}
+
 function Container({ children }: { children: React.ReactNode }) {
   return <div className="mx-auto w-full max-w-6xl px-4 sm:px-6 lg:px-8">{children}</div>;
 }
@@ -400,7 +478,7 @@ function Hero() {
   const heroText = useMemo(() => 'Create your digital\nprofile in seconds.', []);
 
   return (
-    <section className="relative overflow-hidden">
+    <section className="relative overflow-visible">
       <motion.div
         aria-hidden="true"
         className="absolute inset-0"
@@ -414,10 +492,41 @@ function Hero() {
 
       <Container>
         <div className="relative py-16 sm:py-20 lg:py-24">
-          <div className="text-center space-y-6">
-            <h1 className="font-display text-balance text-4xl font-semibold tracking-tight text-brand-ink sm:text-5xl">
-              <TypewriterText text={heroText} />
-            </h1>
+          <div className="grid items-center gap-10 lg:grid-cols-[1.1fr_0.9fr]">
+            <div className="space-y-6 text-center lg:text-left">
+              <div className="text-base font-medium text-brand-muted sm:text-lg">Forget about paper cards.</div>
+              <h1 className="font-display text-balance text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl lg:text-7xl">
+                <TypewriterText text={heroText} />
+              </h1>
+              <button
+                type="button"
+                className="group inline-flex items-center gap-3 text-base font-semibold text-brand-ink"
+                onClick={() => document.getElementById('plans')?.scrollIntoView({ behavior: 'smooth', block: 'start' })}
+              >
+                <span className="text-brand-muted">Start here</span>
+                <span
+                  aria-hidden="true"
+                  className="grid h-10 w-10 place-items-center rounded-xl border border-black/10 bg-white/80 shadow-soft transition-all duration-300 group-hover:-translate-y-0.5 group-hover:bg-brand-accent/15"
+                >
+                  <span className="grid gap-1">
+                    <span className="h-[2px] w-5 rounded-full bg-brand-ink" />
+                    <span className="h-[2px] w-5 rounded-full bg-brand-ink" />
+                    <span className="h-[2px] w-5 rounded-full bg-brand-ink" />
+                  </span>
+                </span>
+              </button>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+              className="relative z-10 mx-auto w-full max-w-[420px] lg:mx-0 lg:-mb-20 lg:translate-y-16 lg:justify-self-end"
+            >
+              <TiltCard className="rounded-[2.75rem] bg-transparent p-0 shadow-none" style={{ perspective: 1200 }}>
+                <PhoneMockup />
+              </TiltCard>
+            </motion.div>
           </div>
         </div>
       </Container>
