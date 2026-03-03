@@ -443,7 +443,7 @@ function Nav() {
             </Link>
             <Link
               className="group relative rounded-full px-4 py-2 font-medium transition-all duration-300 hover:-translate-y-0.5 hover:bg-brand-accent/15 hover:text-brand-ink hover:shadow-soft"
-              href="/about"
+              href="#about"
             >
               About Us
               <span className="absolute inset-x-3 -bottom-0.5 h-[2px] w-0 rounded-full bg-brand-accent transition-all duration-300 group-hover:w-[calc(100%-1.5rem)]" />
@@ -485,9 +485,9 @@ function Nav() {
                 <Link className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10" href="/" onClick={() => setMobileMenuOpen(false)}>
                   Home
                 </Link>
-                <Link className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10" href="/about" onClick={() => setMobileMenuOpen(false)}>
+                <a className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10" href="#about" onClick={() => setMobileMenuOpen(false)}>
                   About Us
-                </Link>
+                </a>
                 <a className="block rounded-xl px-3 py-2 text-base font-medium text-brand-ink transition-colors hover:bg-brand-accent/10" href="#plans" onClick={() => setMobileMenuOpen(false)}>
                   Plans
                 </a>
@@ -606,167 +606,167 @@ function Steps() {
   );
 }
 
- function FeaturesSection() {
-   const items = [
-     {
-       title: 'QR Profile',
-       body: 'Showcase your digital identity with a dynamic QR that adapts to your brand, content, and purpose.',
-       note: 'Instant access to your profile from any device, anywhere.',
-       icon: (
-         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-           <path
-             d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-             strokeLinejoin="round"
-           />
-           <path
-             d="M20 21a8 8 0 0 0-16 0"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-             strokeLinejoin="round"
-           />
-         </svg>
-       ),
-     },
-     {
-       title: 'Ease Sharing',
-       body: 'Share your contact and brand in seconds with just a tap or scan — no app required.',
-       note: 'Designed for efficiency, built for speed.',
-       icon: (
-         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-           <path
-             d="M10 13a5 5 0 0 0 7.07 0l1.41-1.41a5 5 0 0 0-7.07-7.07L10.7 5"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-             strokeLinejoin="round"
-           />
-           <path
-             d="M14 11a5 5 0 0 0-7.07 0L5.52 12.41a5 5 0 0 0 7.07 7.07L13.3 19"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-             strokeLinejoin="round"
-           />
-         </svg>
-       ),
-     },
-     {
-       title: 'Quick Save',
-       body: 'Enable contacts to instantly save your details into their phone or CRM.',
-       note: 'One tap is all it takes to stay remembered.',
-       icon: (
-         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-           <path
-             d="M12 8v4l3 3"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-             strokeLinejoin="round"
-           />
-           <path
-             d="M21 12a9 9 0 1 1-9-9 9 9 0 0 1 9 9Z"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-             strokeLinejoin="round"
-           />
-         </svg>
-       ),
-     },
-     {
-       title: 'Manage Leads',
-       body: 'Collect, organize, and follow up with contacts using integrated lead management tools.',
-       note: 'Never lose a connection again.',
-       icon: (
-         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-           <path
-             d="M16 11a4 4 0 1 0-8 0"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-             strokeLinejoin="round"
-           />
-           <path
-             d="M3 21a9 9 0 0 1 18 0"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-             strokeLinejoin="round"
-           />
-         </svg>
-       ),
-     },
-     {
-       title: 'Analytics and Reports',
-       body: 'Track engagement, link clicks, and connection data with real-time reporting tools.',
-       note: 'Know what works — optimize your results.',
-       icon: (
-         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-           <path
-             d="M4 19V5"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-           />
-           <path
-             d="M8 19v-6"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-           />
-           <path
-             d="M12 19v-9"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-           />
-           <path
-             d="M16 19v-4"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-           />
-           <path
-             d="M20 19v-12"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-           />
-         </svg>
-       ),
-     },
-     {
-       title: 'Custom Design',
-       body: 'Tailor every element — from colors to fonts — for a link page that matches your personal style.',
-       note: 'Your brand, your rules, your look.',
-       icon: (
-         <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
-           <path
-             d="M12 3a9 9 0 1 0 9 9"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-           />
-           <path
-             d="M12 12h9"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-           />
-           <path
-             d="M12 12V3"
-             stroke="currentColor"
-             strokeWidth="2"
-             strokeLinecap="round"
-           />
-         </svg>
-       ),
-     },
-   ];
+function FeaturesSection() {
+  const items = [
+    {
+      title: 'QR Profile',
+      body: 'Showcase your digital identity with a dynamic QR that adapts to your brand, content, and purpose.',
+      note: 'Instant access to your profile from any device, anywhere.',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+          <path
+            d="M12 12a4 4 0 1 0-4-4 4 4 0 0 0 4 4Z"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M20 21a8 8 0 0 0-16 0"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ),
+    },
+    {
+      title: 'Ease Sharing',
+      body: 'Share your contact and brand in seconds with just a tap or scan — no app required.',
+      note: 'Designed for efficiency, built for speed.',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+          <path
+            d="M10 13a5 5 0 0 0 7.07 0l1.41-1.41a5 5 0 0 0-7.07-7.07L10.7 5"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M14 11a5 5 0 0 0-7.07 0L5.52 12.41a5 5 0 0 0 7.07 7.07L13.3 19"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ),
+    },
+    {
+      title: 'Quick Save',
+      body: 'Enable contacts to instantly save your details into their phone or CRM.',
+      note: 'One tap is all it takes to stay remembered.',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+          <path
+            d="M12 8v4l3 3"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M21 12a9 9 0 1 1-9-9 9 9 0 0 1 9 9Z"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ),
+    },
+    {
+      title: 'Manage Leads',
+      body: 'Collect, organize, and follow up with contacts using integrated lead management tools.',
+      note: 'Never lose a connection again.',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+          <path
+            d="M16 11a4 4 0 1 0-8 0"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+          <path
+            d="M3 21a9 9 0 0 1 18 0"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+            strokeLinejoin="round"
+          />
+        </svg>
+      ),
+    },
+    {
+      title: 'Analytics and Reports',
+      body: 'Track engagement, link clicks, and connection data with real-time reporting tools.',
+      note: 'Know what works — optimize your results.',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+          <path
+            d="M4 19V5"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M8 19v-6"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M12 19v-9"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M16 19v-4"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M20 19v-12"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      ),
+    },
+    {
+      title: 'Custom Design',
+      body: 'Tailor every element — from colors to fonts — for a link page that matches your personal style.',
+      note: 'Your brand, your rules, your look.',
+      icon: (
+        <svg viewBox="0 0 24 24" fill="none" className="h-5 w-5" aria-hidden="true">
+          <path
+            d="M12 3a9 9 0 1 0 9 9"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M12 12h9"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+          <path
+            d="M12 12V3"
+            stroke="currentColor"
+            strokeWidth="2"
+            strokeLinecap="round"
+          />
+        </svg>
+      ),
+    },
+  ];
 
   return (
     <section className="relative py-14 sm:py-16">
@@ -821,6 +821,169 @@ function Steps() {
             ))}
           </div>
         </div>
+      </Container>
+    </section>
+  );
+}
+
+function AboutUsSection() {
+  return (
+    <section id="about" className="py-10 sm:py-12">
+      <Container>
+        <TiltCard
+          initial={{ opacity: 0, x: -18 }}
+          whileInView={{ opacity: 1, x: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1] }}
+          className="overflow-hidden rounded-[2.25rem] bg-black/5"
+        >
+          <div className="grid items-stretch gap-0 lg:grid-cols-2">
+            <div className="px-8 py-10 sm:px-10 sm:py-12">
+              <div className="font-display text-5xl font-medium tracking-tight text-brand-ink sm:text-6xl">
+                <div className="text-brand-ink/70">More</div>
+                <div>About Us</div>
+              </div>
+            </div>
+
+            <motion.div
+              initial={{ opacity: 0, x: 18 }}
+              whileInView={{ opacity: 1, x: 0 }}
+              viewport={{ once: true, margin: '-120px' }}
+              transition={{ duration: 0.65, ease: [0.22, 1, 0.36, 1], delay: 0.05 }}
+              className="relative min-h-[260px] overflow-hidden lg:min-h-[360px]"
+            >
+              <div className="absolute inset-0 flex items-end justify-end px-8 pt-10 sm:px-10">
+                <div className="relative h-full w-full max-w-[580px]">
+                  <Image
+                    src="/image-from-rawpixel-id-12065257-png-1.png.webp"
+                    alt=""
+                    fill
+                    className="object-contain object-right-bottom [filter:drop-shadow(0_28px_44px_rgba(0,0,0,0.18))] [mask-image:radial-gradient(ellipse_at_75%_40%,black_0%,black_58%,transparent_82%)]"
+                    priority={false}
+                  />
+                </div>
+              </div>
+              <div className="absolute inset-0 bg-gradient-to-br from-white/10 via-white/0 to-black/15" />
+            </motion.div>
+          </div>
+        </TiltCard>
+
+        <TiltCard
+          initial={{ opacity: 0, y: 12 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
+          className="mt-6 rounded-[1.75rem] border border-black/10 bg-white/85 p-7 shadow-soft backdrop-blur sm:mt-8 sm:p-8"
+        >
+          <div className="text-2xl font-semibold tracking-tight text-brand-ink">Who we are?</div>
+          <p className="mt-4 text-sm leading-relaxed text-brand-muted">
+            Hello eCard is a professional digital platform developed by DevShalom LLC, a technology-driven company dedicated to delivering innovative digital identity solutions. Our application empowers individuals and businesses to create dynamic, shareable digital profiles that can be scanned and saved in seconds using QR codes, mobile wallets, and customizable templates.
+          </p>
+          <p className="mt-4 text-sm leading-relaxed text-brand-muted">
+            Whether you&apos;re a freelancer, entrepreneur, or corporate professional, Hello eCard helps you stand out with a modern, eco-friendly alternative to traditional business cards — enhancing visibility, boosting engagement, and making meaningful connections easier than ever.
+          </p>
+        </TiltCard>
+
+        <TiltCard
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
+          className="mt-8 overflow-hidden rounded-[1.75rem] border border-brand-accent/20 bg-brand-accent/10 shadow-soft backdrop-blur"
+        >
+          <div className="bg-brand-accent px-4 py-8 text-brand-ink sm:px-6 sm:py-10">
+            <div className="text-balance text-2xl font-medium tracking-tight sm:text-3xl lg:text-4xl">
+              We are <span className="text-brand-ink/90">innovation</span>
+            </div>
+          </div>
+        </TiltCard>
+
+        <TiltCard
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
+          className="mt-8 overflow-hidden rounded-[1.75rem] bg-black text-white shadow-soft"
+        >
+          <div className="grid gap-10 px-8 py-12 sm:px-10 lg:grid-cols-2">
+            <div>
+              <div className="text-3xl font-semibold tracking-tight sm:text-4xl">Our History</div>
+              <p className="mt-5 max-w-prose text-sm leading-relaxed text-white/80">
+                Founded with the vision to bridge the gap between traditional networking and the digital age, Hello eCard was created to modernize the way professionals connect. What began as a simple contact-sharing tool has evolved into a comprehensive platform for lead generation, digital branding, and mobile integration.
+              </p>
+            </div>
+
+            <div>
+              <div className="text-3xl font-semibold tracking-tight sm:text-4xl">Our Philosophy</div>
+              <p className="mt-5 max-w-prose text-sm leading-relaxed text-white/80">
+                At Hello eCard, we believe that connections drive growth. Our philosophy centers around simplicity, speed, and smart design — making it easier for you to present yourself or your brand in the most efficient and memorable way possible.
+              </p>
+            </div>
+          </div>
+        </TiltCard>
+
+        <TiltCard
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
+          className="relative mt-6 overflow-hidden rounded-[1.75rem] border border-black/10 bg-white/85 shadow-soft backdrop-blur"
+        >
+          <div className="grid gap-10 p-8 sm:p-10 lg:grid-cols-[1fr_1.25fr] lg:items-stretch">
+            <div>
+              <div className="text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Mission</div>
+              <p className="mt-4 text-sm leading-relaxed text-brand-muted">
+                To revolutionize personal and business networking through cutting-edge digital tools that simplify and enhance how information is shared.
+              </p>
+
+              <div className="mt-10 text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Vision</div>
+              <p className="mt-4 text-sm leading-relaxed text-brand-muted">
+                To become the global standard in digital identity and profile sharing by providing a seamless, secure, and eco-friendly alternative to traditional business cards.
+              </p>
+            </div>
+
+            <div className="relative overflow-hidden rounded-[1.25rem] bg-black/5">
+              <div className="absolute inset-0 bg-gradient-to-br from-black/0 via-black/0 to-black/15" />
+              <div className="absolute inset-0">
+                <Image src="/Captura de pantalla 2026-01-22 a la(s) 20.19.59.png" alt="" fill className="object-cover" priority={false} />
+              </div>
+            </div>
+          </div>
+        </TiltCard>
+
+        <TiltCard
+          initial={{ opacity: 0, y: 25 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, margin: '-120px' }}
+          transition={{ duration: 0.9, ease: [0.25, 1, 0.5, 1] }}
+          className="relative mt-8 overflow-hidden rounded-[1.75rem] bg-black text-white shadow-soft"
+        >
+          <div className="grid items-center gap-8 px-8 py-10 sm:px-10 sm:py-12 lg:grid-cols-[1fr_auto]">
+            <div>
+              <div className="font-display text-center text-3xl font-medium tracking-tight sm:text-4xl lg:text-left lg:text-5xl">
+                Let’s Build Your Professional
+                <br />
+                Profile Together
+              </div>
+              <div className="mx-auto mt-6 h-px w-4/5 bg-white/15 lg:mx-0 lg:w-[520px]" />
+              <div className="mt-5 text-center text-xl font-medium tracking-tight text-white/90 sm:text-2xl lg:text-left">
+                Attract More Customers with Ease&quot;
+              </div>
+            </div>
+
+            <div className="mx-auto w-[140px] shrink-0 sm:w-[160px] lg:mx-0 lg:w-[180px]">
+              <div className="relative aspect-[9/16] overflow-visible">
+                <Image
+                  src="/WhatsApp Image 2026-01-22 at 20.33.37.jpeg"
+                  alt=""
+                  fill
+                  className="object-contain [filter:drop-shadow(0_18px_28px_rgba(0,0,0,0.55))] [mix-blend-mode:screen]"
+                  priority={false}
+                />
+              </div>
+            </div>
+          </div>
+        </TiltCard>
       </Container>
     </section>
   );
@@ -1025,6 +1188,7 @@ export default function Page() {
         <Steps />
         <SectionDivider />
         <FeaturesSection />
+        <AboutUsSection />
         <Plans />
         <Footer />
       </div>
