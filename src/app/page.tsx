@@ -991,114 +991,131 @@ function AboutUsSection() {
 
 function Plans() {
   return (
-    <section id="plans" className="py-14 sm:py-16">
+    <section id="plans" className="relative py-16 sm:py-20">
+      <div
+        aria-hidden="true"
+        className="pointer-events-none absolute inset-0"
+        style={{
+          background:
+            'radial-gradient(900px 420px at 50% 0%, rgba(250,204,21,0.14), rgba(250,204,21,0) 60%), radial-gradient(1000px 520px at 30% 80%, rgba(0,0,0,0.05), rgba(0,0,0,0) 60%)',
+        }}
+      />
       <Container>
-        <div className="flex flex-col gap-8">
+        <div className="relative flex flex-col gap-10">
           <motion.h2
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-            className="font-display text-center text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl"
+            className="font-display text-center text-6xl font-semibold tracking-tight text-brand-ink sm:text-7xl"
           >
             Plans
           </motion.h2>
 
-          <div className="mx-auto grid w-full max-w-4xl gap-6 md:grid-cols-2">
-            <TiltCard
-              initial={{ opacity: 0, y: 20 }}
+          <div className="mx-auto -mt-4 max-w-2xl text-center text-base leading-relaxed text-brand-muted sm:text-lg">
+            Choose the plan that fits your goals. Upgrade anytime and start sharing your profile in seconds.
+          </div>
+
+          <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-              className="rounded-[2rem] border border-black/10 bg-white/90 p-6 shadow-soft backdrop-blur"
+              className="group relative overflow-hidden rounded-[2.75rem] border border-black/10 bg-white/85 shadow-soft backdrop-blur"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-accent/10 text-brand-ink ring-1 ring-black/5">
-                    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-                      <path
-                        d="M7 10V8a5 5 0 0 1 10 0v2"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                      <path
-                        d="M6 10h12v10H6V10Z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="text-xl font-semibold tracking-tight text-brand-ink">Free Plan</div>
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_320px_at_30%_20%,rgba(250,204,21,0.18),transparent_60%)]" />
+              <div className="relative grid gap-8 px-7 py-8 sm:px-10 sm:py-10 lg:grid-cols-[1fr_auto] lg:items-center">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-accent/10 text-brand-ink ring-1 ring-black/5">
+                      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
+                        <path
+                          d="M7 10V8a5 5 0 0 1 10 0v2"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                        <path
+                          d="M6 10h12v10H6V10Z"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinecap="round"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Free Plan</div>
+                      <div className="mt-1 text-sm font-medium text-brand-muted sm:text-base">Start fast. No credit card.</div>
+                    </div>
+                    <span className="ml-auto inline-flex items-center rounded-full border border-black/10 bg-brand-accent/10 px-3 py-1 text-xs font-semibold text-brand-ink">
+                      Start
+                    </span>
                   </div>
                 </div>
 
-                <span className="inline-flex items-center rounded-full border border-black/10 bg-brand-accent/10 px-3 py-1 text-xs font-semibold text-brand-ink">
-                  Start
-                </span>
+                <div className="flex flex-col gap-3 lg:w-[320px]">
+                  <button
+                    type="button"
+                    className="pressable inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand-ink px-6 py-4 text-base font-semibold text-brand-accent shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+                  >
+                    <span aria-hidden="true">→</span>
+                    Continue with Free
+                  </button>
+                  <div className="text-center text-xs text-brand-muted sm:text-sm">Upgrade anytime.</div>
+                </div>
               </div>
+            </motion.div>
 
-              <p className="mt-4 text-sm leading-relaxed text-brand-muted">
-                1 item per module. Editing is not allowed. You can delete it, but you won&apos;t be able to create another item in that module.
-              </p>
-
-              <button
-                type="button"
-                className="pressable mt-6 inline-flex w-full items-center justify-center gap-2 rounded-full bg-brand-ink px-5 py-3 text-sm font-semibold text-brand-accent shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
-              >
-                <span aria-hidden="true">→</span>
-                Continue with Free
-              </button>
-            </TiltCard>
-
-            <TiltCard
-              initial={{ opacity: 0, y: 20 }}
+            <motion.div
+              initial={{ opacity: 0, y: 18 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.08, ease: [0.25, 1, 0.5, 1] }}
-              className="rounded-[2rem] border border-black/10 bg-white/90 p-6 shadow-soft backdrop-blur"
+              className="group relative overflow-hidden rounded-[2.75rem] border border-brand-accent/45 bg-black text-white shadow-lift"
             >
-              <div className="flex items-start justify-between gap-4">
-                <div className="flex items-center gap-3">
-                  <div className="grid h-12 w-12 place-items-center rounded-2xl bg-brand-accent/10 text-brand-ink ring-1 ring-black/5">
-                    <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-                      <path
-                        d="M12 2l3 6 6 .9-4.4 4.3 1 6.3L12 17.8 6.4 19.5l1-6.3L3 8.9 9 8l3-6Z"
-                        stroke="currentColor"
-                        strokeWidth="2"
-                        strokeLinejoin="round"
-                      />
-                    </svg>
-                  </div>
-                  <div>
-                    <div className="text-xl font-semibold tracking-tight text-brand-ink">Premium Plan</div>
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_320px_at_30%_20%,rgba(250,204,21,0.38),transparent_60%)]" />
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-white/0 to-white/0" />
+
+              <div className="relative grid gap-8 px-7 py-8 sm:px-10 sm:py-10 lg:grid-cols-[1fr_auto] lg:items-center">
+                <div className="min-w-0">
+                  <div className="flex flex-wrap items-center gap-3">
+                    <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-accent text-black ring-1 ring-black/10">
+                      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
+                        <path
+                          d="M12 2l3 6 6 .9-4.4 4.3 1 6.3L12 17.8 6.4 19.5l1-6.3L3 8.9 9 8l3-6Z"
+                          stroke="currentColor"
+                          strokeWidth="2"
+                          strokeLinejoin="round"
+                        />
+                      </svg>
+                    </div>
+                    <div className="min-w-0">
+                      <div className="text-3xl font-semibold tracking-tight sm:text-4xl">Premium Plan</div>
+                      <div className="mt-1 text-sm font-medium text-white/75 sm:text-base">Unlimited access + pro branding</div>
+                    </div>
+                    <span className="ml-auto inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
+                      Best value
+                    </span>
                   </div>
                 </div>
 
-                <span className="inline-flex items-center rounded-full border border-black/10 bg-brand-accent/15 px-3 py-1 text-xs font-semibold text-brand-ink">
-                  Best value
-                </span>
+                <div className="flex flex-col gap-3 lg:w-[360px]">
+                  <button
+                    type="button"
+                    className="pressable inline-flex w-full items-center justify-center rounded-2xl bg-brand-accent px-6 py-4 text-base font-semibold text-black shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+                  >
+                    39.96 USD / 1 year
+                  </button>
+                  <button
+                    type="button"
+                    className="pressable inline-flex w-full items-center justify-center rounded-2xl bg-white/10 px-6 py-4 text-base font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-lift"
+                  >
+                    59.76 USD / 2 years
+                  </button>
+                  <div className="text-center text-xs text-white/60 sm:text-sm">Annual billing. Cancel anytime.</div>
+                </div>
               </div>
-
-              <p className="mt-4 text-sm leading-relaxed text-brand-muted">Unlimited access. Annual billing only.</p>
-              <div className="mt-3 text-sm font-medium text-brand-ink">Choose your period:</div>
-
-              <div className="mt-5 grid gap-3">
-                <button
-                  type="button"
-                  className="pressable inline-flex w-full items-center justify-center rounded-full bg-brand-accent px-5 py-3 text-sm font-semibold text-black shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
-                >
-                  39.96 USD / 1 year
-                </button>
-                <button
-                  type="button"
-                  className="pressable inline-flex w-full items-center justify-center rounded-full bg-brand-accent px-5 py-3 text-sm font-semibold text-black shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
-                >
-                  59.76 USD / 2 years
-                </button>
-              </div>
-            </TiltCard>
+            </motion.div>
           </div>
         </div>
       </Container>
