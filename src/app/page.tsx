@@ -1011,7 +1011,7 @@ function Plans() {
             Plans
           </motion.h2>
 
-          <div className="mx-auto -mt-4 max-w-2xl text-center text-base leading-relaxed text-brand-muted sm:text-lg">
+          <div className="mx-auto -mt-4 max-w-2xl text-pretty text-center text-base font-medium leading-relaxed text-brand-muted sm:text-lg">
             Choose the plan that fits your goals. Upgrade anytime and start sharing your profile in seconds.
           </div>
 
@@ -1045,13 +1045,17 @@ function Plans() {
                       </svg>
                     </div>
                     <div className="min-w-0">
-                      <div className="text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Free Plan</div>
-                      <div className="mt-1 text-sm font-medium text-brand-muted sm:text-base">Start fast. No credit card.</div>
+                      <div className="font-display text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Basic Plan</div>
+                      <div className="mt-1 text-sm font-medium tracking-tight text-brand-muted sm:text-base">Start fast. No credit card.</div>
                     </div>
                     <span className="ml-auto inline-flex items-center rounded-full border border-black/10 bg-brand-accent/10 px-3 py-1 text-xs font-semibold text-brand-ink">
                       Start
                     </span>
                   </div>
+
+                  <p className="mt-5 max-w-3xl text-pretty text-[0.95rem] leading-6 tracking-[0.01em] text-brand-muted/90 sm:text-[1.05rem] sm:leading-7">
+                    This plan is designed for those who want to get started and explore the application easily. It allows you to create a single item within the platform and offers limited functionality in the other tools. It&apos;s ideal for testing the system, familiarizing yourself with its environment, and understanding its potential. While it does have restrictions on customization, advanced management, and access to additional modules, it maintains a controlled yet functional experience for taking your first steps.
+                  </p>
                 </div>
 
                 <div className="flex flex-col gap-3 lg:w-[320px]">
@@ -1090,13 +1094,17 @@ function Plans() {
                       </svg>
                     </div>
                     <div className="min-w-0">
-                      <div className="text-3xl font-semibold tracking-tight sm:text-4xl">Premium Plan</div>
-                      <div className="mt-1 text-sm font-medium text-white/75 sm:text-base">Unlimited access + pro branding</div>
+                      <div className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">Premium Plan</div>
+                      <div className="mt-1 text-sm font-medium tracking-tight text-white/75 sm:text-base">Unlimited access + pro branding</div>
                     </div>
                     <span className="ml-auto inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
                       Best value
                     </span>
                   </div>
+
+                  <p className="mt-5 max-w-3xl text-pretty text-[0.95rem] leading-6 tracking-[0.01em] text-white/80 sm:text-[1.05rem] sm:leading-7">
+                    With this plan, you gain full access and complete freedom within the application. You can create and manage multiple items without restrictions, use all advanced tools, customize every detail, and take full advantage of every available module. Upon payment, you unlock the platform&apos;s full potential, without limits or barriers, enjoying a smooth, professional experience designed to take your management to the next level.
+                  </p>
                 </div>
 
                 <div className="flex flex-col gap-3 lg:w-[360px]">
