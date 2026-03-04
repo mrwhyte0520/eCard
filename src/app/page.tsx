@@ -826,6 +826,109 @@ function FeaturesSection() {
   );
 }
 
+const TEMPLATE_CARDS = [
+  { src: '/template-1.jpeg', label: 'Grid' },
+  { src: '/template-2.jpeg', label: 'Minimal' },
+  { src: '/template-3.jpeg', label: 'Violet' },
+  { src: '/template-4.jpeg', label: 'Warm' },
+  { src: '/template-5.jpeg', label: 'Sky' },
+];
+
+function TemplatesShowcaseSection() {
+  const reducedMotion = usePrefersReducedMotion();
+  const scrollingTemplates = useMemo(() => [...TEMPLATE_CARDS, ...TEMPLATE_CARDS], []);
+
+  return (
+    <section id="examples" className="relative overflow-hidden py-16 sm:py-20">
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(1200px_520px_at_50%_-10%,rgba(250,204,21,0.18),transparent_62%)]" />
+      <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_520px_at_15%_110%,rgba(0,0,0,0.07),transparent_60%)]" />
+
+      <Container>
+        <div className="relative mx-auto max-w-6xl">
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-120px' }}
+            transition={{ duration: 0.85, ease: [0.25, 1, 0.5, 1] }}
+            className="mx-auto max-w-3xl text-center"
+          >
+            <div className="inline-flex items-center rounded-full border border-black/10 bg-white/60 px-3 py-1 text-xs font-semibold text-brand-ink shadow-soft backdrop-blur">
+              Examples
+            </div>
+            <div className="mt-4 font-display text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl">
+              Artistic card templates
+            </div>
+            <div className="mt-5 text-pretty text-base font-medium leading-relaxed text-brand-muted sm:text-lg">
+              Pick a style, personalize it, and share instantly with a premium look.
+            </div>
+            <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
+              <a
+                href="#plans"
+                className="pressable inline-flex items-center justify-center rounded-2xl bg-brand-ink px-6 py-4 text-base font-semibold text-brand-accent shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+              >
+                View Plans
+              </a>
+              <a
+                href="#support"
+                className="pressable inline-flex items-center justify-center rounded-2xl border border-black/10 bg-white/70 px-6 py-4 text-base font-semibold text-brand-ink shadow-soft backdrop-blur transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+              >
+                Contact
+              </a>
+            </div>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, y: 18 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-120px' }}
+            transition={{ duration: 0.85, ease: [0.25, 1, 0.5, 1], delay: 0.05 }}
+            className="relative mt-10"
+          >
+            <div aria-hidden="true" className="pointer-events-none absolute -inset-10 rounded-[3rem] bg-brand-accent/10 blur-3xl" />
+            <div className="relative overflow-hidden rounded-[2.75rem] border border-black/10 bg-white/75 p-6 shadow-lift backdrop-blur sm:p-8">
+              <div className="text-sm font-semibold tracking-tight text-brand-ink">Template runway</div>
+
+              <div className="mt-6 relative min-h-[360px] overflow-hidden rounded-[2.25rem] border border-black/10 bg-white/60">
+                <div className="pointer-events-none absolute inset-y-0 left-0 z-10 w-16 bg-gradient-to-r from-white/90 via-white/40 to-transparent" />
+                <div className="pointer-events-none absolute inset-y-0 right-0 z-10 w-16 bg-gradient-to-l from-white/90 via-white/40 to-transparent" />
+                <div
+                  className={cn(
+                    'runway-track flex gap-5 p-5',
+                    reducedMotion && 'runway-track-paused'
+                  )}
+                >
+                  {scrollingTemplates.map((t, idx) => (
+                    <TiltCard
+                      key={`${idx}-${t.src}`}
+                      className="relative w-[220px] shrink-0 overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-soft"
+                    >
+                      <motion.div
+                        animate={{ y: [0, idx % 2 === 0 ? -6 : 6, 0] }}
+                        transition={{ duration: 5.5 + (idx % 3) * 0.6, ease: 'easeInOut', repeat: Infinity }}
+                        className="relative"
+                      >
+                        <div className="relative aspect-[9/16]">
+                          <Image src={t.src} alt="" fill className="object-cover" priority={false} />
+                        </div>
+                        <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent px-4 pb-4 pt-10 text-white">
+                          <div className="flex items-center justify-between gap-3">
+                            <div className="text-sm font-semibold tracking-tight">{t.label}</div>
+                            <div className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold backdrop-blur">Template</div>
+                          </div>
+                        </div>
+                      </motion.div>
+                    </TiltCard>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        </div>
+      </Container>
+    </section>
+  );
+}
+
 function AboutUsSection() {
   return (
     <section id="about" className="py-10 sm:py-12">
@@ -1224,6 +1327,7 @@ export default function Page() {
         <Steps />
         <SectionDivider />
         <FeaturesSection />
+        <TemplatesShowcaseSection />
         <AboutUsSection />
         <Plans />
         <Footer />

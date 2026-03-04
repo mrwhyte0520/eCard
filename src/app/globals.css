@@ -90,6 +90,24 @@ body {
   opacity: 1;
 }
 
+.runway-track {
+  width: max-content;
+  animation: runwayScroll 26s linear infinite;
+}
+
+.runway-track-paused {
+  animation-play-state: paused;
+}
+
+@keyframes runwayScroll {
+  from {
+    transform: translate3d(0, 0, 0);
+  }
+  to {
+    transform: translate3d(-50%, 0, 0);
+  }
+}
+
 @keyframes floaty {
   0% {
     transform: translate3d(0, 0, 0);
