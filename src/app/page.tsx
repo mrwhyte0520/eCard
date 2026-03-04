@@ -1015,99 +1015,88 @@ function Plans() {
             Choose the plan that fits your goals. Upgrade anytime and start sharing your profile in seconds.
           </div>
 
-          <div className="mx-auto flex w-full max-w-6xl flex-col gap-6">
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
+          <div className="mx-auto grid w-full max-w-6xl gap-8 lg:grid-cols-2">
+            <TiltCard
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, ease: [0.25, 1, 0.5, 1] }}
-              className="group relative overflow-hidden rounded-[2.75rem] border border-black/10 bg-white/85 shadow-soft backdrop-blur"
+              className="relative overflow-hidden rounded-[2.5rem] border border-black/10 bg-white/90 p-8 shadow-soft backdrop-blur sm:p-10"
             >
-              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_320px_at_30%_20%,rgba(250,204,21,0.18),transparent_60%)]" />
-              <div className="relative grid gap-8 px-7 py-8 sm:px-10 sm:py-10 lg:grid-cols-[1fr_auto] lg:items-center">
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-accent/10 text-brand-ink ring-1 ring-black/5">
-                      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-                        <path
-                          d="M7 10V8a5 5 0 0 1 10 0v2"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                        <path
-                          d="M6 10h12v10H6V10Z"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinecap="round"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                    <div className="min-w-0">
-                      <div className="font-display text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Basic Plan</div>
-                      <div className="mt-1 text-sm font-medium tracking-tight text-brand-muted sm:text-base">Start fast. No credit card.</div>
-                    </div>
-                    <span className="ml-auto inline-flex items-center rounded-full border border-black/10 bg-brand-accent/10 px-3 py-1 text-xs font-semibold text-brand-ink">
-                      Start
-                    </span>
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_320px_at_20%_0%,rgba(250,204,21,0.14),transparent_60%)]" />
+              <div className="relative">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <div className="font-display text-3xl font-semibold tracking-tight text-brand-ink sm:text-4xl">Basic Plan</div>
+                    <div className="mt-2 text-base font-semibold text-brand-ink">Best for getting started</div>
                   </div>
-
-                  <p className="mt-5 max-w-3xl text-pretty text-[0.95rem] leading-6 tracking-[0.01em] text-brand-muted/90 sm:text-[1.05rem] sm:leading-7">
-                    This plan is designed for those who want to get started and explore the application easily. It allows you to create a single item within the platform and offers limited functionality in the other tools. It&apos;s ideal for testing the system, familiarizing yourself with its environment, and understanding its potential. While it does have restrictions on customization, advanced management, and access to additional modules, it maintains a controlled yet functional experience for taking your first steps.
-                  </p>
+                  <span className="inline-flex shrink-0 items-center rounded-full border border-black/10 bg-brand-accent/10 px-3 py-1 text-xs font-semibold text-brand-ink">
+                    Start
+                  </span>
                 </div>
 
-                <div className="flex flex-col gap-3 lg:w-[320px]">
-                  <button
-                    type="button"
-                    className="pressable inline-flex w-full items-center justify-center gap-2 rounded-2xl bg-brand-ink px-6 py-4 text-base font-semibold text-brand-accent shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
-                  >
-                    <span aria-hidden="true">→</span>
-                    Continue with Free
-                  </button>
-                  <div className="text-center text-xs text-brand-muted sm:text-sm">Upgrade anytime.</div>
+                <div className="mt-7 flex items-end gap-2">
+                  <div className="font-display text-5xl font-semibold tracking-tight text-brand-ink sm:text-6xl">$0</div>
+                  <div className="pb-2 text-sm font-medium text-brand-muted">/ year</div>
+                </div>
+                <div className="mt-1 text-sm text-brand-muted">Explore the platform with a controlled experience.</div>
+
+                <button
+                  type="button"
+                  className="pressable mt-7 inline-flex w-full items-center justify-center rounded-2xl bg-brand-ink px-6 py-4 text-base font-semibold text-brand-accent shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
+                >
+                  Continue with Basic
+                </button>
+
+                <div className="mt-8 border-t border-black/10 pt-6">
+                  <div className="text-sm font-semibold text-brand-ink">Basic features</div>
+                  <div className="mt-4 space-y-3 text-sm text-brand-muted sm:text-base">
+                    <div className="flex items-start gap-3">
+                      <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-accent/15 text-brand-ink">✓</span>
+                      Create a single item
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-accent/15 text-brand-ink">✓</span>
+                      Limited functionality across tools
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-accent/15 text-brand-ink">✓</span>
+                      Ideal for testing and learning the platform
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-accent/15 text-brand-ink">✓</span>
+                      Restrictions on customization and advanced modules
+                    </div>
+                  </div>
                 </div>
               </div>
-            </motion.div>
+            </TiltCard>
 
-            <motion.div
-              initial={{ opacity: 0, y: 18 }}
+            <TiltCard
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.08, ease: [0.25, 1, 0.5, 1] }}
-              className="group relative overflow-hidden rounded-[2.75rem] border border-brand-accent/45 bg-black text-white shadow-lift"
+              className="relative overflow-hidden rounded-[2.5rem] border border-brand-accent/45 bg-black p-8 text-white shadow-lift sm:p-10"
             >
-              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(900px_320px_at_30%_20%,rgba(250,204,21,0.38),transparent_60%)]" />
+              <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-[radial-gradient(700px_320px_at_20%_0%,rgba(250,204,21,0.38),transparent_60%)]" />
               <div aria-hidden="true" className="pointer-events-none absolute inset-0 bg-gradient-to-br from-white/10 via-white/0 to-white/0" />
-
-              <div className="relative grid gap-8 px-7 py-8 sm:px-10 sm:py-10 lg:grid-cols-[1fr_auto] lg:items-center">
-                <div className="min-w-0">
-                  <div className="flex flex-wrap items-center gap-3">
-                    <div className="grid h-14 w-14 shrink-0 place-items-center rounded-2xl bg-brand-accent text-black ring-1 ring-black/10">
-                      <svg viewBox="0 0 24 24" fill="none" className="h-6 w-6" aria-hidden="true">
-                        <path
-                          d="M12 2l3 6 6 .9-4.4 4.3 1 6.3L12 17.8 6.4 19.5l1-6.3L3 8.9 9 8l3-6Z"
-                          stroke="currentColor"
-                          strokeWidth="2"
-                          strokeLinejoin="round"
-                        />
-                      </svg>
-                    </div>
-                    <div className="min-w-0">
-                      <div className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">Premium Plan</div>
-                      <div className="mt-1 text-sm font-medium tracking-tight text-white/75 sm:text-base">Unlimited access + pro branding</div>
-                    </div>
-                    <span className="ml-auto inline-flex items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
-                      Best value
-                    </span>
+              <div className="relative">
+                <div className="flex items-start justify-between gap-4">
+                  <div className="min-w-0">
+                    <div className="font-display text-3xl font-semibold tracking-tight sm:text-4xl">Premium Plan</div>
+                    <div className="mt-2 text-base font-semibold text-white">Best for professionals</div>
                   </div>
-
-                  <p className="mt-5 max-w-3xl text-pretty text-[0.95rem] leading-6 tracking-[0.01em] text-white/80 sm:text-[1.05rem] sm:leading-7">
-                    With this plan, you gain full access and complete freedom within the application. You can create and manage multiple items without restrictions, use all advanced tools, customize every detail, and take full advantage of every available module. Upon payment, you unlock the platform&apos;s full potential, without limits or barriers, enjoying a smooth, professional experience designed to take your management to the next level.
-                  </p>
+                  <span className="inline-flex shrink-0 items-center rounded-full border border-white/15 bg-white/10 px-3 py-1 text-xs font-semibold text-white">
+                    Best value
+                  </span>
                 </div>
 
-                <div className="flex flex-col gap-3 lg:w-[360px]">
+                <div className="mt-7 flex items-end gap-2">
+                  <div className="font-display text-5xl font-semibold tracking-tight text-white sm:text-6xl">$39.96</div>
+                  <div className="pb-2 text-sm font-medium text-white/70">/ year</div>
+                </div>
+                <div className="mt-1 text-sm text-white/70">Full access and complete freedom inside the platform.</div>
+
+                <div className="mt-7 grid gap-3">
                   <button
                     type="button"
                     className="pressable inline-flex w-full items-center justify-center rounded-2xl bg-brand-accent px-6 py-4 text-base font-semibold text-black shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift"
@@ -1122,8 +1111,30 @@ function Plans() {
                   </button>
                   <div className="text-center text-xs text-white/60 sm:text-sm">Annual billing. Cancel anytime.</div>
                 </div>
+
+                <div className="mt-8 border-t border-white/10 pt-6">
+                  <div className="text-sm font-semibold text-white">Premium advanced features</div>
+                  <div className="mt-4 space-y-3 text-sm text-white/80 sm:text-base">
+                    <div className="flex items-start gap-3">
+                      <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-accent text-black">✓</span>
+                      Create and manage multiple items
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-accent text-black">✓</span>
+                      Full access to all tools and modules
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-accent text-black">✓</span>
+                      Customize every detail
+                    </div>
+                    <div className="flex items-start gap-3">
+                      <span className="mt-1 grid h-5 w-5 shrink-0 place-items-center rounded-full bg-brand-accent text-black">✓</span>
+                      Smooth professional experience without limits
+                    </div>
+                  </div>
+                </div>
               </div>
-            </motion.div>
+            </TiltCard>
           </div>
         </div>
       </Container>
