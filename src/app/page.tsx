@@ -826,13 +826,7 @@ function FeaturesSection() {
   );
 }
 
-const TEMPLATE_CARDS = [
-  { src: '/template-1.jpeg', label: 'Grid' },
-  { src: '/template-2.jpeg', label: 'Minimal' },
-  { src: '/template-3.jpeg', label: 'Violet' },
-  { src: '/template-4.jpeg', label: 'Warm' },
-  { src: '/template-5.jpeg', label: 'Sky' },
-];
+const TEMPLATE_CARDS = ['/p.jpeg', '/pa.jpeg', '/pal.jpeg', '/pali.jpeg'];
 
 function TemplatesShowcaseSection() {
   const reducedMotion = usePrefersReducedMotion();
@@ -897,9 +891,9 @@ function TemplatesShowcaseSection() {
                     reducedMotion && 'runway-track-paused'
                   )}
                 >
-                  {scrollingTemplates.map((t, idx) => (
+                  {scrollingTemplates.map((src, idx) => (
                     <TiltCard
-                      key={`${idx}-${t.src}`}
+                      key={`${idx}-${src}`}
                       className="relative w-[220px] shrink-0 overflow-hidden rounded-[2rem] border border-black/10 bg-white shadow-soft"
                     >
                       <motion.div
@@ -908,11 +902,10 @@ function TemplatesShowcaseSection() {
                         className="relative"
                       >
                         <div className="relative aspect-[9/16]">
-                          <Image src={t.src} alt="" fill className="object-cover" priority={false} />
+                          <Image src={src} alt="" fill className="object-cover" priority={false} />
                         </div>
                         <div className="absolute inset-x-0 bottom-0 bg-gradient-to-t from-black/55 via-black/15 to-transparent px-4 pb-4 pt-10 text-white">
-                          <div className="flex items-center justify-between gap-3">
-                            <div className="text-sm font-semibold tracking-tight">{t.label}</div>
+                          <div className="flex w-full justify-end">
                             <div className="rounded-full bg-white/10 px-3 py-1 text-xs font-semibold backdrop-blur">Template</div>
                           </div>
                         </div>
