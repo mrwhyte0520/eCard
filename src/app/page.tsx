@@ -826,7 +826,7 @@ function FeaturesSection() {
   );
 }
 
-const TEMPLATE_CARDS = ['/p.jpeg', '/pa.jpeg', '/pal.jpeg', '/pali.jpeg'];
+const TEMPLATE_CARDS = ['/h.jpeg', '/lo.jpeg', '/ol.jpeg', '/oll.jpeg'];
 
 function TemplatesShowcaseSection() {
   const reducedMotion = usePrefersReducedMotion();
@@ -853,7 +853,7 @@ function TemplatesShowcaseSection() {
               Artistic card templates
             </div>
             <div className="mt-5 text-pretty text-base font-medium leading-relaxed text-brand-muted sm:text-lg">
-              Pick a style, personalize it, and share instantly with a premium look.
+              Change colors, rearrange sections, add your own images, and enjoy full customization in every card.
             </div>
             <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:justify-center">
               <a
