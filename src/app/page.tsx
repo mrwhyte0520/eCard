@@ -1203,7 +1203,7 @@ function Plans() {
                     type="button"
                     className="pressable inline-flex w-full items-center justify-center rounded-2xl bg-white/10 px-6 py-4 text-base font-semibold text-white shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:bg-white/15 hover:shadow-lift"
                   >
-                    59.76 USD / 2 years
+                    59.99 USD / 3 years
                   </button>
                   <div className="text-center text-xs text-white/60 sm:text-sm">Annual billing. Cancel anytime.</div>
                 </div>
